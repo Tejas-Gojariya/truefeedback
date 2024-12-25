@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
                     } else {
                         throw new Error("Incorrect Password")
                     }
-                } catch (err) {
+                } catch (err: any) {
                     throw new Error(err);
                 }
             }
@@ -53,9 +53,9 @@ export const authOptions: NextAuthOptions = {
         },
         async jwt({token, user}) {
             if(user) {
-                token._id = user.id?toString()
-                token.isVerified = user.isVerified,
-                token.isAcceptingMessges = user.isAcceptingMessges
+                token._id = user.id?.toString(); // Convert ObjectId to string
+                token.isVerified = user.isVerified;
+                token.isAcceptingMessges = user.isAcceptingMessges;
                 token.username = user.username
             }
             return token
