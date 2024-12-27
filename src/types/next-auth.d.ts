@@ -1,6 +1,6 @@
 import 'next-auth'
 
-delcare module 'next-auth' {
+declare module 'next-auth' {
     interface User{
         _id?: string;
         isVerfied? : boolean;
