@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { ApiResponse } from '@/types/ApiResponce';
+import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebounce } from 'usehooks-ts';
 import * as z from 'zod';
-import { Button } from "@/components/ui/button"
+
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormField,
@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 import axios, { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -185,3 +185,4 @@ export default function SignUpForm() {
     </div>
   );
 }
+
