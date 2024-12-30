@@ -15,6 +15,7 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
+import { genratePDF, generateCSV } from '../../../helpers/pdfGenerator';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -61,6 +62,7 @@ function UserDashboard() {
       setIsSwitchLoading(false);
       try {
         const response = await axios.get<ApiResponse>('/api/get-messages');
+        console.log(response.data)
         setMessages(response.data.messages || []);
         if (refresh) {
           toast({
@@ -149,6 +151,23 @@ function UserDashboard() {
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>
+
+      <Button
+        variant="outline"
+        onClick={() => genratePDF(messages)}
+        className="mt-4"
+      >
+        Export to PDF
+      </Button>
+
+      <Button
+        variant="outline"
+        onClick={() => generateCSV(messages)}
+        // onClick={handleExportCSV} // Trigger CSV export
+        className="mt-4 ml-2"
+      >
+        Export to CSV
+      </Button>
 
       <div className="mb-4">
         <Switch
