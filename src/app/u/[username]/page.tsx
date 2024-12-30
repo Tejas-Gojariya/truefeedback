@@ -35,6 +35,7 @@ const initialMessageString =
   "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
+  const [rating, setRating] = useState<number | null>(null)
   const params = useParams<{ username: string }>();
   const username = params.username;
 
@@ -66,6 +67,7 @@ export default function SendMessage() {
       const response = await axios.post<ApiResponse>('/api/send-message', {
         ...data,
         username,
+        rating // include the rating
       });
 
       toast({
@@ -73,6 +75,7 @@ export default function SendMessage() {
         variant: 'default',
       });
       form.reset({ ...form.getValues(), content: '' });
+      setRating(null) // reset the rating after submission
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -115,6 +118,23 @@ export default function SendMessage() {
                     {...field}
                   />
                 </FormControl>
+                <div className="p-4 border border-2 rounded-lg items-center">
+                  <div className="flex items-center justify-between">
+                    <p className="border p-2 rounded-md text-sm font-light">
+                      Feedback Rate
+                    </p>
+                    {[...Array(10)].map((_, index) => (
+                      <Button
+                        key={index + 1}
+                        onClick={() => setRating(index + 1)}
+                        className={`${rating === index + 1 ? "bg-blue-500 text-white" : ""
+                          }`}
+                      >
+                        {index + 1}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
                 <FormMessage />
               </FormItem>
             )}

@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface Message extends Document {
   content: string;
   createdAt: Date;
+  rating: Number;
 }
 
 const MessageSchema: Schema<Message> = new mongoose.Schema({
@@ -15,6 +16,10 @@ const MessageSchema: Schema<Message> = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
+  rating: {
+    type: Number,
+    required: true,
+  }
 });
 
 export interface User extends Document {
@@ -22,7 +27,7 @@ export interface User extends Document {
   email: string;
   password: string;
   verifyCode: string;
-  verifyCodeExpiry: Date; 
+  verifyCodeExpiry: Date;
   isVerified: boolean;
   isAcceptingMessages: boolean;
   messages: Message[];

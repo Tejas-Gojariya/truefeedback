@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { X } from 'lucide-react';
 import { Message } from '@/model/User';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -56,6 +56,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
             <CardHeader>
                 <div className="flex justify-between items-center">
                     <CardTitle>{message.content}</CardTitle>
+                    <CardDescription>Rating:{message.rating}</CardDescription>
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
                             <Button variant='destructive'>
