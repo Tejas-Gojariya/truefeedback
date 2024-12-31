@@ -1,4 +1,5 @@
 import { jsPDF } from 'jspdf';
+import dayjs from 'dayjs';
 
 /**
  * Generates a PDF from the given messages and downloads it.
@@ -19,7 +20,8 @@ export const genratePDF = (messages) => {
     doc.text(`ID: ${message._id}`, 10, yOffset + 10);
     doc.text(`Content: ${message.content}`, 10, yOffset + 20);
     doc.text(`Rating: ${message.rating}`, 10, yOffset + 30);
-    yOffset += 40; // Increment offset
+    doc.text(`Date: ${dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}`,10, yOffset + 40)
+    yOffset += 50; // Increment offset
   });
 
   // Save the PDF

@@ -15,7 +15,8 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
-import { genratePDF, generateCSV } from '../../../helpers/pdfGenerator';
+import { genratePDF } from '../../../helpers/pdfGenerator';
+import { generateCSV } from '../../../helpers/csvGenerator';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -163,7 +164,6 @@ function UserDashboard() {
       <Button
         variant="outline"
         onClick={() => generateCSV(messages)}
-        // onClick={handleExportCSV} // Trigger CSV export
         className="mt-4 ml-2"
       >
         Export to CSV

@@ -1,16 +1,19 @@
+import dayjs from "dayjs";
+
 /**
  * Generates a CSV from the given messages and triggers a download.
  * @param {Array} messages - Array of message objects to include in the CSV.
  */
 export const generateCSV = (messages) => {
   // Create the CSV headers
-  const headers = ['ID', 'Content', 'Rating'];
+  const headers = ['ID', 'Content', 'Rating', 'Date'];
 
   // Prepare the data rows
   const rows = messages.map((message) => [
     message._id,
     message.content,
-    message.rating
+    message.rating,
+    dayjs(message.createdAt).format('MMM D, YYYY h:mm A')
   ]);
 
   // Combine headers and rows into a CSV string
