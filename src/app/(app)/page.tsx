@@ -1,149 +1,11 @@
-// 'use client';
-
-// import { Mail } from 'lucide-react';
-// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import Autoplay from 'embla-carousel-autoplay';
-// import messages from '@/messages.json';
-
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-// } from '@/components/ui/carousel';
-
-// export default function Home() {
-//   return (
-//     <>
-//       {/* Main content */}
-//       <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-800 text-white">
-//         <section className="text-center mb-8 md:mb-12">
-//           <h1 className="text-3xl md:text-5xl font-bold">
-//             Dive into the World of Anonymous Feedback
-//           </h1>
-//           <p className="mt-3 md:mt-4 text-base md:text-lg">
-//             True Feedback - Where your identity remains a secret.
-//           </p>
-//         </section>
-
-//         {/* Carousel for Messages */}
-//         <Carousel
-//           plugins={[Autoplay({ delay: 2000 })]}
-//           className="w-full max-w-lg md:max-w-xl"
-//         >
-//           <CarouselContent>
-//             {messages.map((message, index) => (
-//               <CarouselItem key={index} className="p-4">
-//                 <Card>
-//                   <CardHeader>
-//                     <CardTitle>{message.title}</CardTitle>
-//                   </CardHeader>
-//                   <CardContent className="flex flex-col md:flex-row items-start space-y-2 md:space-y-0 md:space-x-4">
-//                     <Mail className="flex-shrink-0" />
-//                     <div>
-//                       <p>{message.content}</p>
-//                       <p className="text-xs text-muted-foreground">
-//                         {message.received}
-//                       </p>
-//                     </div>
-//                   </CardContent>
-//                 </Card>
-//               </CarouselItem>
-//             ))}
-//           </CarouselContent>
-//         </Carousel>
-//       </main>
-
-//       {/* Footer */}
-//       <footer className="text-center p-4 md:p-6 bg-gray-900 text-white">
-//         © 2024 True Feedback. All rights reserved.
-//       </footer>
-//     </>
-//   );
-// }
-
-// 'use client';
-
-// import { Mail } from 'lucide-react';
-// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import Autoplay from 'embla-carousel-autoplay';
-// import messages from '@/messages.json';
-
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-// } from '@/components/ui/carousel';
-
-// export default function Home() {
-//   return (
-//     <>
-//       {/* Main content */}
-//       <main className="flex-grow flex flex-col items-center justify-center px-6 md:px-12 py-12 bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white">
-//         <section className="text-center mb-10">
-//           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
-//             Dive into the World of Anonymous Feedback
-//           </h1>
-//           <p className="mt-4 text-lg md:text-xl text-gray-300">
-//             True Feedback - Where your identity remains a secret.
-//           </p>
-//         </section>
-
-//         {/* Carousel for Messages */}
-//         <Carousel
-//           plugins={[Autoplay({ delay: 2000 })]}
-//           className="w-full max-w-lg md:max-w-2xl shadow-2xl rounded-lg overflow-hidden"
-//         >
-//           <CarouselContent>
-//             {messages.map((message, index) => (
-//               <CarouselItem
-//                 key={index}
-//                 className="p-6 rounded-lg flex flex-col bg-white border border-gray-200 shadow-md"
-//               >
-//                 <Card className="w-full p-6">
-//                   <div className="mb-4" />
-//                   <CardHeader>
-//                     <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-//                       <span>Today</span>
-//                       <Mail className="w-5 h-5 text-gray-500" />
-//                     </div>
-//                     <CardTitle className="text-lg font-semibold text-gray-800">
-//                       {message.title}
-//                     </CardTitle>
-//                   </CardHeader>
-//                   <CardContent className="flex flex-col">
-//                     <p className="text-sm text-gray-700 mb-4">
-//                       {message.content}
-//                       <a href="#" className="text-blue-500 ml-2">
-//                         Show more
-//                       </a>
-//                     </p>
-//                     <div className="flex items-center text-xs text-gray-500">
-//                       <Mail className="w-4 h-4 mr-2" />
-//                       <span>{message.received}</span>
-//                     </div>
-//                   </CardContent>
-//                 </Card>
-//               </CarouselItem>
-//             ))}
-//           </CarouselContent>
-//         </Carousel>
-//       </main>
-
-//       {/* Footer */}
-//       <footer className="text-center p-6 bg-gray-900 text-gray-400 text-sm">
-//         © 2024 True Feedback. All rights reserved.
-//       </footer>
-//     </>
-//   );
-// }
-
-
 'use client';
 
 import { Mail } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
+import { Button } from '@/components/ui/button';
+import Footer from '@/components/Footer';
 
 import {
   Carousel,
@@ -154,184 +16,54 @@ import {
 export default function Home() {
   return (
     <>
-      {/* <main className="flex-grow flex flex-col items-center justify-center px-6 md:px-12 py-12 bg-gradient-to-b from-gray-800 via-gray-900 to-black text-white">
-        <section className="text-center mb-10">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
-            Dive into the World of Anonymous Feedback
-          </h1>
-          <p className="mt-4 text-lg md:text-xl text-gray-300">
-            True Feedback - Where your identity remains a secret.
-          </p>
-        </section>
-
-        <Carousel className="border-t-4 border-transparent bg-gradient-to-r from-blue-400  to-green-600 w-full max-w-lg md:max-w-2xl shadow-2xl rounded-lg overflow-hidden" plugins={[Autoplay({ delay: 2000 })]}>
-          <CarouselContent>
-            {messages.map((message, index) => (
-              <CarouselItem key={index} className="p-4 rounded-lg flex flex-col bg-white border border-gray-200 shadow-md">
-                <CarouselItem className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
-                  <Card className="flex-auto p-4 md:p-6">
-                    <CardContent className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-                      {message.content}
-                    </CardContent>
-                    <CardHeader className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-                      <div className="flex items-center gap-x-3">
-                        <div className="grow">
-                          <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-                            <div className="flex items-center gap-x-3">
-                              <div className="shrink-0">
-                                <img className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
-                              </div>
-
-                              <div className="grow">
-                                <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                                  {message.title}
-                                </p>
-                                <p className="text-xs text-gray-500 dark:text-neutral-400">
-                                  {message.received}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </CarouselItem>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-
-      </main > */}
-
       <div className="overflow-hidden bg-gray-800 dark:bg-neutral-950">
         <div className="relative max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div className="max-w-2xl w-3/4 lg:w-1/2 mb-6 sm:mb-10 md:mb-16">
-            <h1 className="text-4xl sm:text-4xl lg:text-6xl font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
+            <h1 className="text-4xl sm:text-4xl lg:text-6xl pb-5 font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Dive into the World of Anonymous Feedback
             </h1>
-            {/* <h2 className="text-6xl max-w-2xl w-3/4 lg:w-1/2 mb-6 sm:mb-10 md:mb-16 font-extrabold leading-tight bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
-            Dive into the World of Anonymous Feedback
-          </h2> */}
-            <p className="text-xl sm:text-3xl lg:text-xl pt-5 text-white">
+            <p className="text-xl sm:text-3xl lg:text-xl text-white">
               True Feedback - Where your identity remains a secret.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
-          <div className="flex h-auto">
-        <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
-          <div className="flex-auto p-4 md:p-6">
-            <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-              " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
-            </p>
-          </div>
+            {messages.map((item, index) => (
+              <div key={index} className="flex h-auto">
+                <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
+                  <div className="flex-auto p-4 md:p-6">
+                    <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
+                      {item.content}
+                    </p>
+                  </div>
 
-          <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-            <div className="flex items-center gap-x-3">
-              <div className="shrink-0">
-                <img className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar"/>
+                  <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
+                    <div className="flex items-center gap-x-3">
+                      <div className="shrink-0">
+                        <img
+                          className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full"
+                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                          alt="Avatar"
+                        />
+                      </div>
+
+                      <div className="grow">
+                        <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
+                          {item.user}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-neutral-400">
+                          {item.received}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div className="grow">
-                <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                  Luisa
-                </p>
-                <p className="text-xs text-gray-500 dark:text-neutral-400">
-                  Senior Director of Operations | Fitbit
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </div>
-      <div className="flex h-auto">
-        <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
-          <div className="flex-auto p-4 md:p-6">
-            <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-              " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
-            </p>
+          <div className='flex justify-center'>
+            <button className='flex justify-center px-10 py-3 mt-10 bg-gray-600 text-white rounded-md text-sm'>See More</button>
           </div>
-
-          <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-            <div className="flex items-center gap-x-3">
-              <div className="shrink-0">
-                <img className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar"/>
-              </div>
-
-              <div className="grow">
-                <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                  Luisa
-                </p>
-                <p className="text-xs text-gray-500 dark:text-neutral-400">
-                  Senior Director of Operations | Fitbit
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-            {/* <Button className='flex justify-center items-center ml-auto px-16 py-6 bg-slate-100 border border-white text-black'>See More</Button> */}
-
-            {/* <div className="flex h-auto">
-        <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
-          <div className="flex-auto p-4 md:p-6">
-            <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-              " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
-            </p>
-          </div>
-
-          <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-            <div className="flex items-center gap-x-3">
-              <div className="shrink-0">
-                <img className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar"/>
-              </div>
-
-              <div className="grow">
-                <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                  Luisa
-                </p>
-                <p className="text-xs text-gray-500 dark:text-neutral-400">
-                  Senior Director of Operations | Fitbit
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex h-auto">
-        <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
-          <div className="flex-auto p-4 md:p-6">
-            <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-              "Refreshing and Thought provoking design and it changes my view about how I design the websites. Great typography, modern clean white design, nice tones of the color. "
-            </p>
-          </div>
-
-          <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
-            <div className="flex items-center gap-x-3">
-              <div className="shrink-0">
-                <img className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full" src="https://images.unsplash.com/photo-1579017331263-ef82f0bbc748?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Avatar"/>
-              </div>
-
-              <div className="grow">
-                <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                  Alisa Williams
-                </p>
-                <p className="text-xs text-gray-500 dark:text-neutral-400">
-                  Entrepreneur | Happy customer
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-          </div>
-
 
           <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
             <div>
@@ -364,9 +96,10 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="text-center p-6 bg-gray-900 text-gray-400 text-sm">
+      {/* <footer className="text-center p-6 bg-gray-900 text-gray-400 text-sm">
         © 2024 True Feedback. All rights reserved.
-      </footer>
+      </footer> */}
+      <Footer/>
     </>
   );
 }
