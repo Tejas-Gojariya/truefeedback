@@ -13,7 +13,9 @@ export async function middleware(request : NextRequest) {
             url.pathname.startsWith('/sign-in') ||
             url.pathname.startsWith('/sign-up') ||
             url.pathname.startsWith('/verify') ||
-            url.pathname.startsWith('/')
+            url.pathname.startsWith('/') ||
+            url.pathname.startsWith('/Profile')
+
         )
     ) {
         return NextResponse.redirect(new URL('/dashboard', request.url))
@@ -29,6 +31,7 @@ export const config = {
         "sign-up",
         "/",
         "/dashboard/:path*",
-        "/verify/:path*"
+        "/verify/:path*",
+        "Profile",
     ],
 }

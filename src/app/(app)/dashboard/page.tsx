@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
 import { genratePDF } from '../../../helpers/pdfGenerator';
 import { generateCSV } from '../../../helpers/csvGenerator';
+import Link from 'next/link';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -139,7 +140,9 @@ function UserDashboard() {
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
-
+      <button>
+        <Link href='/Profile'>Profile</Link>
+      </button>
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
         <div className="flex items-center">

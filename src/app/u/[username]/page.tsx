@@ -123,7 +123,7 @@ export default function SendMessage() {
                     <p className="border p-2 rounded-md text-sm font-light">
                       Feedback Rate
                     </p>
-                    {[...Array(10)].map((_, index) => (
+                    {[...Array(5)].map((_, index) => (
                       <Button
                         key={index + 1}
                         onClick={() => setRating(index + 1)}
