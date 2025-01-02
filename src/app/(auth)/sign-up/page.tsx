@@ -22,6 +22,7 @@ import axios, { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { signUpSchema } from '@/schemas/signUpSchema';
+import HeroSection from '@/components/HeroSection';
 
 export default function SignUpForm() {
   const [username, setUsername] = useState('');
@@ -98,91 +99,99 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join True Feedback
-          </h1>
-          <p className="mb-4">Sign up to start your anonymous adventure</p>
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              name="username"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <Input
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      setUsername(e.target.value);
-                    }}
-                  />
-                  {isCheckingUsername && <Loader2 className="animate-spin" />}
-                  {!isCheckingUsername && usernameMessage && (
-                    <p
-                      className={`text-sm ${
-                        usernameMessage === 'Username is unique'
-                          ? 'text-green-500'
-                          : 'text-red-500'
-                      }`}
-                    >
-                      {usernameMessage}
-                    </p>
-                  )}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="email"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <Input {...field} name="email" />
-                  <p className='text-gray-800 text-xs'>We will send you a verification code</p>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <HeroSection>
+      <Form {...form} >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className='lg:max-w-lg lg:mx-auto lg:me-0 ms-auto'>
+            <div className='p-4 sm:p-7 flex flex-col bg-neutral-900 rounded-2xl shadow-lg'>
+              <div className="text-center">
+                <h1 className="block text-2xl font-bold text-gray-200">Start your free trial</h1>
+                <p className="mt-2 text-sm text-gray-500">
+                  Set up New Account &nbsp;
+                  <a
+                    className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
+                    href="/sign-up"
+                  >
+                    Sign up here
+                  </a>
+                </p>
+              </div>
 
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" {...field} name="password" />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className='w-full' disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please wait
-                </>
-              ) : (
-                'Sign Up'
-              )}
-            </Button>
-          </form>
-        </Form>
-        <div className="text-center mt-4">
-          <p>
-            Already a member?{' '}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
-              Sign in
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+              <div className='mt-5 text-white'>
+
+                <FormField
+                  name="username"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className='pb-5'>
+                      <FormLabel>Username</FormLabel>
+                      <Input
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setUsername(e.target.value);
+                        }}
+                        className='text-gray-300 bg-transparent border-gray-500'
+                      />
+                      {isCheckingUsername && <Loader2 className="animate-spin" />}
+                      {!isCheckingUsername && usernameMessage && (
+                        <p
+                          className={`text-sm ${usernameMessage === 'Username is unique'
+                            ? 'text-green-500'
+                            : 'text-red-500'
+                            }`}
+                        >
+                          {usernameMessage}
+                        </p>
+                      )}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="email"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className='pb-5'>
+                      <FormLabel>Email</FormLabel>
+                      <Input {...field} name="email" className='text-gray-300 bg-transparent border-gray-500' />
+                      <p className='text-gray-500 text-xs'>We will send you a verification code</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className='pb-10'>
+                      <FormLabel>Password </FormLabel>
+                      <Input type="password" {...field} name="password" className='text-gray-300 bg-transparent border-gray-500' />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className='w-full bg-gray-800 hover:bg-slate-700' disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </>
+                  ) : (
+                    'Sign Up'
+                  )}
+                </Button>
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </form>
+      </Form>
+    </HeroSection>
   );
 }
 

@@ -22,7 +22,7 @@ export default function Home() {
             <h1 className="text-4xl sm:text-4xl lg:text-6xl pb-5 font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Dive into the World of Anonymous Feedback
             </h1>
-            <p className="text-xl sm:text-3xl lg:text-xl text-white">
+            <p className="text-xl sm:text-3xl lg:text-xl text-blue-400 italic">
               True Feedback - Where your identity remains a secret.
             </p>
           </div>
