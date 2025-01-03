@@ -99,8 +99,8 @@ export default function SendMessage() {
   };
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+    <div className="container mx-auto my-8 p-6 sm:p-8 md:p-10 bg-gray-800 rounded-xl shadow-xl max-w-4xl">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-white">
         Public Profile Link
       </h1>
       <Form {...form}>
@@ -110,25 +110,29 @@ export default function SendMessage() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+                <FormLabel className="text-lg font-medium text-gray-300">
+                  Send Anonymous Message to @{username}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
-                    className="resize-none"
+                    className="resize-none w-full p-4 bg-gray-700 text-white rounded-md border border-gray-600 focus:ring-2 focus:ring-purple-500 focus:outline-none"
                     {...field}
                   />
                 </FormControl>
-                <div className="p-4 border border-2 rounded-lg items-center">
-                  <div className="flex items-center justify-between">
-                    <p className="border p-2 rounded-md text-sm font-light">
-                      Feedback Rate
-                    </p>
+
+                {/* Feedback Rating Section */}
+                <div className="mt-6 p-6 bg-gray-800 rounded-lg border-2 border-gray-600">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="text-sm font-medium text-gray-400">Feedback Rating</p>
                     {[...Array(5)].map((_, index) => (
                       <Button
                         key={index + 1}
                         onClick={() => setRating(index + 1)}
-                        className={`${rating === index + 1 ? "bg-blue-500 text-white" : ""
-                          }`}
+                        className={`p-3.5 rounded-full text-xl font-bold ${rating === index + 1
+                          ? 'bg-gray-600 text-white'
+                          : 'bg-gray-600 text-gray-300'
+                          } hover:bg-gray-500 transition-all`}
                       >
                         {index + 1}
                       </Button>
@@ -139,14 +143,15 @@ export default function SendMessage() {
               </FormItem>
             )}
           />
+
           <div className="flex justify-center">
             {isLoading ? (
-              <Button disabled>
+              <Button disabled className="flex items-center justify-center bg-gray-700 text-gray-400">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
+              <Button type="submit" disabled={isLoading || !messageContent} className="mt-4 bg-purple-600 text-white hover:bg-purple-700 transition-all">
                 Send It
               </Button>
             )}
@@ -154,30 +159,22 @@ export default function SendMessage() {
         </form>
       </Form>
 
-      <div className="space-y-4 my-8">
-        <div className="space-y-2">
-          <Button
-            onClick={fetchSuggestedMessages}
-            className="my-4"
-            disabled={isSuggestLoading}
-          >
-            Suggest Messages
-          </Button>
-          <p>Click on any message below to select it.</p>
-        </div>
-        <Card>
+      <div className="space-y-8 my-8">
+
+        {/* Suggested Messages Section */}
+        <Card className="bg-gray-700 border-none">
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-200">Suggested Messages</h3>
           </CardHeader>
-          <CardContent className="flex flex-col space-y-4">
+          <CardContent className="flex flex-col space-y-4 bg-gray-700">
             {error ? (
-              <p className="text-red-500">{error.message}</p>
+              <p className="text-red-500 text-center">{error.message}</p>
             ) : (
               parseStringMessages(completion).map((message, index) => (
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2"
+                  className="w-full hover:text-white sm:w-auto text-gray-200 border-gray-500 bg-gray-800 hover:bg-gray-600 border-none transition-all"
                   onClick={() => handleMessageClick(message)}
                 >
                   {message}
@@ -185,13 +182,29 @@ export default function SendMessage() {
               ))
             )}
           </CardContent>
+          <div className="text-center space-y-4">
+            <Button
+              onClick={fetchSuggestedMessages}
+              className="mb-5 w-full sm:w-auto bg-gray-900 text-gray-300 hover:bg-gray-600 transition-all"
+              disabled={isSuggestLoading}
+            >
+              Generate Suggestions
+            </Button>
+          </div>
         </Card>
       </div>
-      <Separator className="my-6" />
-      <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
-        <Link href={'/sign-up'}>
-          <Button>Create Your Account</Button>
+
+      <Separator className="my-6 border-gray-600" />
+
+      {/* Create Account Section */}
+      <div className="text-center p-5 space-y-4 mx-5">
+        <div className="text-lg sm:text-xl pb-5 text-gray-300">
+          Get Your Message Board
+        </div>
+        <Link href="/sign-up">
+          <Button className="w-full sm:w-auto bg-purple-600 text-white hover:bg-purple-700 transition-all">
+            Create Your Account
+          </Button>
         </Link>
       </div>
     </div>

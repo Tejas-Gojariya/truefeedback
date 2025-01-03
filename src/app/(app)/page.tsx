@@ -16,17 +16,19 @@ import {
 export default function Home() {
   return (
     <>
-      <div className="overflow-hidden bg-gray-800 dark:bg-neutral-950">
-        <div className="relative max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-          <div className="max-w-2xl w-3/4 lg:w-1/2 mb-6 sm:mb-10 md:mb-16">
-            <h1 className="text-4xl sm:text-4xl lg:text-6xl pb-5 font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
+      <div className="bg-gray-900 text-gray-300 min-h-screen px-6 py-10  overflow-hidden ">
+        <div className=" space-y-16 relative max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+          {/* Hero Section */}
+          <div className="text-center space-y-6">
+            <h1 className="text-5xl font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Dive into the World of Anonymous Feedback
             </h1>
-            <p className="text-xl sm:text-3xl lg:text-xl text-blue-400 italic">
+            <p className="text-lg text-blue-400 italic">
               True Feedback - Where your identity remains a secret.
             </p>
           </div>
 
+          {/* Feedback Messages */}
           <div className="grid sm:grid-cols-2 gap-6">
             {messages.map((item, index) => (
               <div key={index} className="flex h-auto">
@@ -61,9 +63,15 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className='flex justify-center'>
-            <button className='flex justify-center px-10 py-3 mt-10 bg-gray-600 text-white rounded-md text-sm'>See More</button>
+
+          {/* Call to Action */}
+          <div className="flex justify-center">
+            <button className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white text-lg font-medium rounded-lg shadow">
+              See More
+            </button>
           </div>
+
+          {/* Metrics Section */}
 
           <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
             <div>
@@ -94,11 +102,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      {/* <footer className="text-center p-6 bg-gray-900 text-gray-400 text-sm">
-        © 2024 True Feedback. All rights reserved.
-      </footer> */}
       <Footer/>
     </>
   );

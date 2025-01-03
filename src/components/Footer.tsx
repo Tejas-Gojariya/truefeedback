@@ -3,23 +3,36 @@ import { Twitter, Github } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <div className='text-start flex justify-between p-6 bg-gray-900 text-gray-400 text-sm'>
-            <div className=''>
-                © 2025 True Feedback. All rights reserved.
-            </div>
-            <div className="sm:flex sm:items-center sm:justify-between">
-                <div className="flex mt-4 sm:justify-center sm:mt-0">
-                    <a href="#" target='_blank' className="text-gray-500 hover:text-gray-600 dark:hover:text-white ms-5">
-                        <Twitter className='w-5 h-5' />
-                        <span className="sr-only">Twitter page</span>
+        <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-gray-400 text-sm py-6">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+                {/* Copyright Section */}
+                <div className="text-center md:text-left mb-4 md:mb-0">
+                    <p className="text-gray-300">
+                        © 2025 <span className="font-semibold text-gray-100">True Feedback</span>. All rights reserved.
+                    </p>
+                </div>
+
+                {/* Social Media Links */}
+                <div className="flex space-x-6">
+                    <a
+                        href="#"
+                        target="_blank"
+                        className="text-gray-400 hover:text-pink-500 transition-colors duration-300"
+                        aria-label="Twitter"
+                    >
+                        <Twitter className="w-6 h-6" />
                     </a>
-                    <a href="https://github.com/Tejas-Gojariya" target='_blank' className="text-gray-500 hover:text-gray-600 dark:hover:text-white ms-5">
-                        <Github className='w-5 h-5' />
-                        <span className="sr-only">GitHub account</span>
+                    <a
+                        href="https://github.com/Tejas-Gojariya"
+                        target="_blank"
+                        className="text-gray-400 hover:text-purple-500 transition-colors duration-300"
+                        aria-label="GitHub"
+                    >
+                        <Github className="w-6 h-6" />
                     </a>
                 </div>
             </div>
-        </div>
+        </footer>
     )
 }
 
