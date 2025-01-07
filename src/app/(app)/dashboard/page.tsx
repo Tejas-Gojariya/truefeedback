@@ -140,9 +140,15 @@ function UserDashboard() {
 
   return (
     <div className="my-4 mx-2 sm:mx-4 md:mx-6 lg:mx-auto p-4 sm:p-6 md:p-8 bg-gray-800 text-gray-100 rounded-lg shadow-md w-full max-w-full md:max-w-6xl">
-      <h1 className="text-2xl sm:text-2xl lg:text-3xl pb-4 font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-start">
-        User Dashboard
-      </h1>
+      <div className='flex justify-between items-center'>
+        <h1 className="text-2xl sm:text-2xl lg:text-3xl pb-4 font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-start">
+          User Dashboard
+        </h1>
+        <Link href="/Profile">
+          <Button>Profile</Button>
+        </Link>
+      </div>
+
 
       {/* Unique Link Section */}
       <div className="mb-6">
@@ -190,6 +196,7 @@ function UserDashboard() {
             disabled={isSwitchLoading}
             className="bg-white rounded-full focus:ring-2 focus:ring-purple-500"
           />
+
         </div>
       </div>
 

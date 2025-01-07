@@ -41,13 +41,13 @@ export default function Home() {
 
                   <div className="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-neutral-800">
                     <div className="flex items-center gap-x-3">
-                      <div className="shrink-0">
+                      {/* <div className="shrink-0">
                         <img
                           className="size-8 sm:h-[2.875rem] sm:w-[2.875rem] rounded-full"
                           src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
                           alt="Avatar"
                         />
-                      </div>
+                      </div> */}
 
                       <div className="grow">
                         <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
@@ -73,7 +73,7 @@ export default function Home() {
 
           {/* Metrics Section */}
 
-          <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
+          {/* <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
             <div>
               <h4 className="text-lg sm:text-xl font-semibold text-white">Lorem, ipsum.</h4>
               <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">99.95%</p>
@@ -91,7 +91,7 @@ export default function Home() {
               <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">85%</p>
               <p className="mt-1 text-gray-400">this year alone</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="absolute bottom-0 end-0 transform lg:translate-x-32" aria-hidden="true">
             <svg className="w-40 h-auto sm:w-72" width="1115" height="636" viewBox="0 0 1115 636" fill="none" xmlns="http://www.w3.org/2000/svg">

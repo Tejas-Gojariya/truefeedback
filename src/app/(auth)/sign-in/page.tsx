@@ -80,7 +80,7 @@ export default function SignInForm() {
 
               <div className="space-y-4">
                 {/* Google Sign-In Button */}
-                <button
+                {/* <button
                   type="button"
                   className="w-full py-2 sm:py-3 px-4 inline-flex justify-center items-center gap-x-3 text-sm md:text-base font-medium rounded-lg border border-gray-700 bg-gray-800 text-gray-200 shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
@@ -91,15 +91,14 @@ export default function SignInForm() {
                     viewBox="0 0 46 47"
                     fill="none"
                   >
-                    {/* SVG paths here */}
                   </svg>
                   Sign in with Google
-                </button>
+                </button> */}
 
                 {/* Or Divider */}
-                <div className="py-3 flex items-center text-xs text-gray-500 uppercase before:flex-1 before:border-t before:border-gray-200 before:mr-4 sm:before:mr-6 after:flex-1 after:border-t after:border-gray-200 after:ml-4 sm:after:ml-6">
+                {/* <div className="py-3 flex items-center text-xs text-gray-500 uppercase before:flex-1 before:border-t before:border-gray-200 before:mr-4 sm:before:mr-6 after:flex-1 after:border-t after:border-gray-200 after:ml-4 sm:after:ml-6">
                   Or
-                </div>
+                </div> */}
 
                 {/* Email/Username Field */}
                 <FormField
