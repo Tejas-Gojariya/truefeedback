@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios, { AxiosError } from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Loader2 } from 'lucide-react';
+import { Loader2, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CardHeader, CardContent, Card } from '@/components/ui/card';
-import { useCompletion } from 'ai/react';
+// import { useCompletion } from 'ai/react';
 import {
   Form,
   FormControl,
@@ -25,29 +25,52 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
 
-const specialChar = '||';
+// const specialChar = '||';
 
-const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split(specialChar);
-};
+// const parseStringMessages = (messageString: string): string[] => {
+//   return messageString.split(specialChar);
+// };
 
-const initialMessageString =
-  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
+// const initialMessageString =
+//   "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
   const [rating, setRating] = useState<number | null>(null)
   const params = useParams<{ username: string }>();
   const username = params.username;
+  const [isSuggestLoading, setIsSuggestLoading] = useState(false);
+  const [suggestedMessages, setSuggestedMessages] = useState<{ messageId: string, messageText: string }[]>([]);
 
-  const {
-    complete,
-    completion,
-    isLoading: isSuggestLoading,
-    error,
-  } = useCompletion({
-    api: '/api/suggest-messages',
-    initialCompletion: initialMessageString,
-  });
+  const fetchSuggestedMessages = useCallback(async () => {
+    setIsSuggestLoading(true);
+    try {
+      const response = await axios.post('/api/suggest-messages');
+      setSuggestedMessages(response.data.suggestions);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+      toast({
+        title: 'Error',
+        description: 'Error fetching suggested messages',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSuggestLoading(false);
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    fetchSuggestedMessages();
+  }, [fetchSuggestedMessages]);
+
+  // const {
+  //   complete,
+  //   completion,
+  //   isLoading: isSuggestLoading,
+  //   error,
+  // } = useCompletion({
+  //   api: '/api/suggest-messages',
+  //   initialCompletion: initialMessageString,
+  // });
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -89,14 +112,18 @@ export default function SendMessage() {
     }
   };
 
-  const fetchSuggestedMessages = async () => {
-    try {
-      complete('');
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-      // Handle error appropriately
-    }
-  };
+  // const fetchSuggestedMessages = async () => {
+  //   try {
+  //     complete('');
+  //   } catch (error) {
+  //     console.error('Error fetching messages:', error);
+  //     // Handle error appropriately
+  //   }
+  // };
+
+  // const handleMessageClick = (message: string) => {
+  //   form.setValue('content', message);
+  // }
 
   return (
     <div className="container mx-auto my-8 p-6 sm:p-8 md:p-10 bg-gray-800 rounded-xl shadow-xl max-w-4xl">
@@ -167,17 +194,17 @@ export default function SendMessage() {
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-200">Suggested Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4 bg-gray-700">
-            {error ? (
-              <p className="text-red-500 text-center">{error.message}</p>
+            {suggestedMessages.length === 0 ? (
+              <p className="text-slate-400">No suggestions available</p>
             ) : (
-              parseStringMessages(completion).map((message, index) => (
+              suggestedMessages.map(({ messageId, messageText }) => (
                 <Button
-                  key={index}
+                  key={messageId}
                   variant="outline"
                   className="w-full hover:text-white sm:w-auto text-gray-200 border-gray-500 bg-gray-800 hover:bg-gray-600 border-none transition-all"
-                  onClick={() => handleMessageClick(message)}
+                  onClick={() => handleMessageClick(messageText)}
                 >
-                  {message}
+                  {messageText}
                 </Button>
               ))
             )}
@@ -188,7 +215,15 @@ export default function SendMessage() {
               className="mb-5 w-full sm:w-auto bg-gray-900 text-gray-300 hover:bg-gray-600 transition-all"
               disabled={isSuggestLoading}
             >
-              Generate Suggestions
+              {isSuggestLoading ? (
+                <>
+                  Loading Messages... &nbsp; <Loader2 className="h-4 w-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  Suggest Messages &nbsp; <RefreshCcw className="h-4 w-4" />
+                </>
+              )}
             </Button>
           </div>
         </Card>
