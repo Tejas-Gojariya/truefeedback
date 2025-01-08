@@ -18,9 +18,16 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
 import HeroSection from '@/components/HeroSection';
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignInForm() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  }
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -121,13 +128,22 @@ export default function SignInForm() {
                   name="password"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="pb-6">
+                    <FormItem className="pb-6 relative">
                       <FormLabel className="text-sm text-gray-300">Password</FormLabel>
-                      <Input
-                        type="password"
-                        className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
-                        {...field}
-                      />
+                      <div className="relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
+                          {...field}
+                        />
+                        <button
+                          type="button"
+                          onClick={togglePasswordVisibility}
+                          className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none"
+                        >
+                          {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+                        </button>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
