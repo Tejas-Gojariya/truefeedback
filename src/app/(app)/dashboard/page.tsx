@@ -145,7 +145,7 @@ function UserDashboard() {
           User Dashboard
         </h1>
         <Link href="/Profile">
-          <Button>Profile</Button>
+          <Button className='font-semibold'>Profile</Button>
         </Link>
       </div>
 
