@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { Trash2 } from 'lucide-react';
@@ -20,7 +20,7 @@ import {
 import { Button } from './ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { ApiResponse } from '../types/ApiResponse';
-import { Calendar } from 'lucide-react';
+import { Calendar, Share2, Twitter, Linkedin } from 'lucide-react';
 
 type MessageCardProps = {
     message: Message;
@@ -29,6 +29,7 @@ type MessageCardProps = {
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
     const { toast } = useToast();
+    const [showShareOptions, setShowShareOptions] = useState(false);
 
     const handleDeleteConfirm = async () => {
         try {
@@ -49,6 +50,19 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                 variant: 'destructive',
             });
         }
+    };
+
+    const handleShare = (platform: 'twitter' | 'linkedin') => {
+        const content = encodeURIComponent(`${message.content}\n#TrueFeedback #Review`);
+        let shareUrl = '';
+
+        if (platform === 'twitter') {
+            shareUrl = `https://twitter.com/intent/tweet?text=${content}`;
+        } else if (platform === 'linkedin') {
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${content}`;
+        }
+
+        window.open(shareUrl, '_blank');
     };
 
     return (
@@ -89,19 +103,50 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                         </AlertDialogContent>
                     </AlertDialog>
                 </div>
+                {/* <div className="mt-5 pt-4 flex justify-between items-center text-sm text-gray-400">
+                    <p className="flex items-center gap-1">
+                        <span className="font-semibold">Rating:</span> {message.rating}
+                    </p>
+                    <div className="flex justify-between items-center pl-5">
+                        <p className="flex items-center gap-2 pr-5">
+                            <Calendar className="w-4 h-4 text-gray-500" />
+                            {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
+                        </p>
+                        <p className='hover:text-white'><Share2 /></p>
+                    </div>
+                </div> */}
                 <div className="mt-5 pt-4 flex justify-between items-center text-sm text-gray-400">
                     <p className="flex items-center gap-1">
                         <span className="font-semibold">Rating:</span> {message.rating}
                     </p>
-                    <p className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-gray-500" />
-                        {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
-                    </p>
+                    <div className="flex justify-between items-center pl-5 relative">
+                        <p className="flex items-center gap-2 pr-5">
+                            <Calendar className="w-4 h-4 text-gray-500" />
+                            {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
+                        </p>
+                        <p
+                            className="hover:text-white cursor-pointer"
+                            onClick={() => setShowShareOptions((prev) => !prev)}
+                        >
+                            <Share2 />
+                        </p>
+                        {showShareOptions && (
+                            <div className="absolute top-full mt-2 right-0 flex gap-2 bg-gray-800 p-2 rounded-md shadow-lg">
+                                <Twitter
+                                    className="w-5 h-5 text-blue-400 hover:text-blue-500 cursor-pointer"
+                                    onClick={() => handleShare('twitter')}
+                                />
+                                <Linkedin
+                                    className="w-5 h-5 text-blue-700 hover:text-blue-800 cursor-pointer"
+                                    onClick={() => handleShare('linkedin')}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </CardHeader>
             <CardContent className="p-1">
             </CardContent>
         </Card>
-
     );
 }
