@@ -12,10 +12,10 @@ const Header = ({ user }: HeaderProps) => {
         <header className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4 sm:gap-0">
             {/* User Greeting */}
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                <h2 className="text-lg font-semibold text-gray-700">
-                    Welcome, {user?.name || user?.email || 'User'}
-                </h2>
-                <p className="text-sm text-gray-500">
+                <h1 className="text-2xl sm:text-2xl lg:text-3xl pb-4 font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-start">
+                    Welcome, {user?.username || user?.email || 'User'}
+                </h1>
+                <p className="text-lg text-blue-400 italic">
                     You’re logged in! 🎉
                 </p>
             </div>

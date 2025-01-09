@@ -41,8 +41,8 @@ export default function ChangePassword() {
   };
 
   return (
-    <div>
-      <h1>Change Password</h1>
+    <div className='flex flex-col items-start'>
+      <h1>User Profile</h1>
       <input
         type="password"
         placeholder="Current Password"

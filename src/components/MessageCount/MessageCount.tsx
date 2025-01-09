@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-// import {
-//   Header,
-//   Loader,
-//   ErrorDisplay,
-//   MessageCountDisplay,
-//   Unauthenticated,
-// } from './MessageCount';
 import Header from "./Header"
 import Loader from "../../utils/Loader"
 import ErrorDisplay from './ErrorDisplay';
@@ -64,7 +57,7 @@ const MessageCount = () => {
       ) : messageCount !== null ? (
         <MessageCountDisplay count={messageCount} />
       ) : (
-        <ErrorDisplay message="Failed to load message count." />
+        < message="Failed to load message count." />
       )}
     </div>
   );
