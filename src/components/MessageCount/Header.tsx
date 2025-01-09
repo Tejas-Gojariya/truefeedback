@@ -9,21 +9,25 @@ interface HeaderProps {
 
 const Header = ({ user }: HeaderProps) => {
     return (
-        <div>
-            <div>
-                <h2>
+        <header className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4 sm:gap-0">
+            {/* User Greeting */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <h2 className="text-lg font-semibold text-gray-700">
                     Welcome, {user?.name || user?.email || 'User'}
                 </h2>
-                <p>You're logged in!</p>
+                <p className="text-sm text-gray-500">
+                    You’re logged in! 🎉
+                </p>
             </div>
+
+            {/* Logout Button */}
             <button
                 onClick={() => signOut()}
-                className=""
+                className="px-5 py-2 bg-red-500 text-white text-sm font-medium rounded-lg shadow hover:bg-red-600 transition-colors duration-200 ease-in-out sm:self-start"
             >
                 Logout
             </button>
-            {/* <button className='' onClick={() => signOut}>Logout</button> */}
-        </div>
+        </header>
     )
 }
 

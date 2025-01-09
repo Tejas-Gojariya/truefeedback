@@ -20,7 +20,7 @@ export default function Home() {
         <div className=" space-y-16 relative max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           {/* Hero Section */}
           <div className="text-center space-y-6">
-            <h1 className="text-5xl font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
+            <h1 className="text-5xl font-extrabold pb-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Dive into the World of Anonymous Feedback
             </h1>
             <p className="text-lg text-blue-400 italic">
