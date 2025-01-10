@@ -1,8 +1,12 @@
-// ChangePassword.tsx
-'use client'
+'use client';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { User } from 'next-auth'
+import { toast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Eye, EyeOff } from 'lucide-react';
+import { FaXTwitter, FaLinkedinIn, FaDiscord, FaDribbble } from "react-icons/fa6";
 
 export default function ChangePassword() {
   const { data: session } = useSession();
@@ -10,53 +14,159 @@ export default function ChangePassword() {
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [socialLinks, setSocialLinks] = useState({
+    linkedin: '',
+    x: '',
+    discord: '',
+    dribbble: '',
+  });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const handleChangePassword = async () => {
     if (!userEmail) {
-      setMessage('You must be logged in to change your password');
+      toast({
+        title: 'Error',
+        description: 'You must be logged in to change your password',
+        variant: 'default',
+        className: 'bg-white text-black',
+      });
       return;
     }
 
-    const response = await fetch('/api/change-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        currentPassword,
-        newPassword,
-      }),
-    });
+    if (currentPassword === newPassword) {
+      toast({
+        title: 'Error',
+        description: 'New password cannot be the same as the current password',
+        variant: 'default',
+        className: 'bg-white text-black',
+      });
+      return;
+    }
 
-    const data = await response.json();
-    console.log(data)
+    try {
+      const response = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail, currentPassword, newPassword }),
+      });
 
-    if (data.success) {
-      setMessage('Password changed successfully');
-    } else {
-      setMessage(data.message || 'Something went wrong');
+      const data = await response.json();
+
+      if (data.success) {
+        setCurrentPassword('');
+        setNewPassword('');
+        toast({
+          title: 'Success',
+          description: 'Password changed successfully',
+          variant: 'default',
+          className: 'bg-white text-black',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: data.message || 'Something went wrong',
+          variant: 'default',
+          className: 'bg-white text-black',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'An unexpected error occurred. Please try again.',
+        variant: 'default',
+        className: 'bg-white text-black',
+      });
+      console.error('Error changing password:', error);
     }
   };
 
+  const handleSocialLinksSave = () => {
+    console.log('Social Links:', socialLinks);
+    setSocialLinks({ linkedin: '', x: '', discord: '', dribbble: '' });
+    toast({
+      title: 'Success',
+      description: 'Social links saved successfully',
+      variant: 'default',
+      className: 'bg-white text-black',
+    });
+  };
+
   return (
-    <div className='flex flex-col items-start'>
-      <h1>User Profile</h1>
-      <input
-        type="password"
-        placeholder="Current Password"
-        value={currentPassword}
-        onChange={(e) => setCurrentPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="New Password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-      />
-      <button onClick={handleChangePassword}>Change Password</button>
-      {message && <p>{message}</p>}
+    <div className="container mx-auto p-4 grid gap-6 lg:grid-cols-2">
+      <Card className="shadow-md bg-gray-700 border-none text-white">
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">Change Password</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+
+          <div className="space-y-4">
+            <Input className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500' value={"tejas"} disabled />
+            <Input className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500' value={"tejas@gmail.com"} disabled />
+
+            <Input
+              type="password"
+              placeholder="Current Password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
+            />
+
+            <div className="relative">
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg'
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500"
+              >
+                {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+              </button>
+            </div>
+
+            <Button onClick={handleChangePassword} className="w-full">
+              Change Password
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-md bg-gray-700 border-none text-white">
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">Social Media Profiles</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {Object.entries(socialLinks).map(([key, value]) => (
+              <div key={key} className="relative flex items-center">
+                {key === 'linkedin' && <FaLinkedinIn size={20} className="absolute left-3 text-blue-600" />}
+                {key === 'x' && <FaXTwitter size={20} className="absolute left-3 text-black" />}
+                {key === 'discord' && <FaDiscord size={20} className="absolute left-3 text-blue-600" />}
+                {key === 'dribbble' && <FaDribbble size={20} className="absolute left-3 text-pink-600" />}
+                <Input
+                  type="url"
+                  placeholder={`${key.charAt(0).toUpperCase() + key.slice(1)} Profile`}
+                  value={value}
+                  onChange={(e) => setSocialLinks({ ...socialLinks, [key]: e.target.value })}
+                  className="pl-10 text-black bg-transparent"
+                />
+              </div>
+            ))}
+            <Button onClick={handleSocialLinksSave} className="w-full">
+              Save
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '../ui/button';
+// import { Button } from '../ui/button';
 interface MessageCountDisplayProps {
     count: number;
 }
@@ -16,7 +16,7 @@ const MessageCountDisplay = ({ count }: MessageCountDisplayProps) => (
                 <CardContent />
             </Card>
 
-            <Card className="w-full border-none max-w-sm bg-gray-700 text-neutral-300 rounded-lg shadow-md">
+            {/* <Card className="w-full border-none max-w-sm bg-gray-700 text-neutral-300 rounded-lg shadow-md">
                 <CardHeader className="p-6 text-center">
                     <CardTitle className="text-2xl font-semibold">Download Your Data</CardTitle>
                     <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 w-full sm:w-auto">
@@ -35,7 +35,7 @@ const MessageCountDisplay = ({ count }: MessageCountDisplayProps) => (
                     </div>
                 </CardHeader>
 
-            </Card>
+            </Card> */}
         </div>
     </>
 );
