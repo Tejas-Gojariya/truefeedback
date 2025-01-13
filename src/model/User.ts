@@ -31,6 +31,12 @@ export interface User extends Document {
   isVerified: boolean;
   isAcceptingMessages: boolean;
   messages: Message[];
+  socialLinks : {
+    linkedin?: string;
+    x?: string;
+    discord?: string;
+    dribbble?: string;
+  };
 }
 
 // Updated User schema
@@ -68,6 +74,12 @@ const UserSchema: Schema<User> = new mongoose.Schema({
     default: true,
   },
   messages: [MessageSchema],
+  socialLinks : {
+    linkedin: {type: String, default: ''},
+    x: {type: String, default: ''},
+    discord: {type: String, default: ''},
+    dribbble: {type: String, default: ''},
+  }
 });
 
 const UserModel =
