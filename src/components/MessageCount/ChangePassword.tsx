@@ -10,7 +10,7 @@ import { FaXTwitter, FaLinkedinIn, FaDiscord, FaDribbble } from "react-icons/fa6
 
 export default function ChangePassword() {
   const { data: session } = useSession();
-  const userEmail = session?.user?.email;
+  const user = session?.user;
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -27,7 +27,7 @@ export default function ChangePassword() {
   };
 
   const handleChangePassword = async () => {
-    if (!userEmail) {
+    if (!user?.email) {
       toast({
         title: 'Error',
         description: 'You must be logged in to change your password',
@@ -51,7 +51,7 @@ export default function ChangePassword() {
       const response = await fetch('/api/change-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail, currentPassword, newPassword }),
+        body: JSON.stringify({ email: user.email, currentPassword, newPassword }),
       });
 
       const data = await response.json();
@@ -103,10 +103,17 @@ export default function ChangePassword() {
         </CardHeader>
 
         <CardContent>
-
           <div className="space-y-4">
-            <Input className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500' value={"tejas"} disabled />
-            <Input className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500' value={"tejas@gmail.com"} disabled />
+            <Input
+              className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
+              value={user?.username || 'Name not available'}
+              disabled
+            />
+            <Input
+              className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
+              value={user?.email || 'Email not available'}
+              disabled
+            />
 
             <Input
               type="password"
@@ -157,7 +164,7 @@ export default function ChangePassword() {
                   placeholder={`${key.charAt(0).toUpperCase() + key.slice(1)} Profile`}
                   value={value}
                   onChange={(e) => setSocialLinks({ ...socialLinks, [key]: e.target.value })}
-                  className="pl-10 text-black bg-transparent"
+                  className="pl-10 text-white bg-transparent"
                 />
               </div>
             ))}

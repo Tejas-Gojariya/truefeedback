@@ -20,7 +20,9 @@ import {
 import { Button } from './ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { ApiResponse } from '../types/ApiResponse';
-import { Calendar, Share2, Twitter, Linkedin } from 'lucide-react';
+import { Calendar } from 'lucide-react';
+import { BsTwitterX } from "react-icons/bs";
+
 
 type MessageCardProps = {
     message: Message;
@@ -52,16 +54,16 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
         }
     };
 
-    const handleShare = (platform: 'twitter' | 'linkedin') => {
+    const handleShare = (platform: 'twitter') => {
         const content = encodeURIComponent(`${message.content}\n#TrueFeedback #Review`);
         let shareUrl = '';
 
         if (platform === 'twitter') {
             shareUrl = `https://twitter.com/intent/tweet?text=${content}`;
-        } else if (platform === 'linkedin') {
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${content}`;
         }
-
+        //  else if (platform === 'linkedin') {
+        //     shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${content}`;
+        // }
         window.open(shareUrl, '_blank');
     };
 
@@ -128,9 +130,9 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                             className="hover:text-white cursor-pointer"
                             onClick={() => setShowShareOptions((prev) => !prev)}
                         >
-                            <Share2 />
+                            <BsTwitterX className='w-5 h-5 cursor-pointer' onClick={() => handleShare('twitter')} />
                         </p>
-                        {showShareOptions && (
+                        {/* {showShareOptions && (
                             <div className="absolute top-full mt-2 right-0 flex gap-2 bg-gray-800 p-2 rounded-md shadow-lg">
                                 <Twitter
                                     className="w-5 h-5 text-blue-400 hover:text-blue-500 cursor-pointer"
@@ -141,7 +143,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                                     onClick={() => handleShare('linkedin')}
                                 />
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </CardHeader>

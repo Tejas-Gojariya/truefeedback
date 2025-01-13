@@ -52,8 +52,6 @@ const MessageCount = () => {
             <MessageCountDisplay count={messageCount} />
           )}
         </div>
-
-
         {/* <UserProfile /> */}
         <ChangePassword />
       </div>
