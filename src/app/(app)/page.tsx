@@ -1,17 +1,17 @@
 'use client';
 
-import { Mail } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Autoplay from 'embla-carousel-autoplay';
+// import { Mail } from 'lucide-react';
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+// import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+// } from '@/components/ui/carousel';
 
 export default function Home() {
   return (
@@ -73,25 +73,25 @@ export default function Home() {
 
           {/* Metrics Section */}
 
-          {/* <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
+          <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
             <div>
-              <h4 className="text-lg sm:text-xl font-semibold text-white">Lorem, ipsum.</h4>
-              <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">99.95%</p>
-              <p className="mt-1 text-gray-400">in fulfilling orders</p>
+              <h4 className="text-lg sm:text-xl font-semibold text-white">Total Feedback</h4>
+              <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">50+</p>
+              <p className="mt-1 text-gray-400">Anonymous feedback collected</p>
             </div>
 
             <div>
-              <h4 className="text-lg sm:text-xl font-semibold text-white">Lorem, ipsum.</h4>
-              <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">2,000+</p>
-              <p className="mt-1 text-gray-400">partner with Preline</p>
+              <h4 className="text-lg sm:text-xl font-semibold text-white">Active Users.</h4>
+              <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">20+</p>
+              <p className="mt-1 text-gray-400">Users actively engaging</p>
             </div>
 
             <div>
-              <h4 className="text-lg sm:text-xl font-semibold text-white">Lorem, ipsum.</h4>
+              <h4 className="text-lg sm:text-xl font-semibold text-white">Satisfaction Rate</h4>
               <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">85%</p>
-              <p className="mt-1 text-gray-400">this year alone</p>
+              <p className="mt-1 text-gray-400">Positive feedback this year</p>
             </div>
-          </div> */}
+          </div>
 
           <div className="absolute bottom-0 end-0 transform lg:translate-x-32" aria-hidden="true">
             <svg className="w-40 h-auto sm:w-72" width="1115" height="636" viewBox="0 0 1115 636" fill="none" xmlns="http://www.w3.org/2000/svg">
