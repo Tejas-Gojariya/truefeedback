@@ -68,10 +68,10 @@ export default function VerifyAccount() {
           {/* Header */}
           <CardHeader className="">
             <CardTitle className="text-center text-xl sm:text-2xl font-semibold text-gray-300">
-              Verify Your Account
+            Confirm Your Identity
             </CardTitle>
             <CardDescription className="text-center text-sm sm:text-base text-gray-500">
-              Enter the verification code sent to your email. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, laudantium?
+            Please enter the verification code sent to your email to complete the process.
             </CardDescription>
           </CardHeader>
 
