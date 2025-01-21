@@ -10,6 +10,7 @@ import MessageCountDisplay from '../../components/MessageCount/MessageCountDispl
 import Unauthenticated from "../../components/MessageCount/Unauthenticated"
 import ChangePassword from "../../components/MessageCount/ChangePassword"
 import UserProfile from '@/components/MessageCount/UserProfile';
+import Link from 'next/link';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url, {
@@ -41,6 +42,7 @@ const MessageCount = () => {
 
   return (
     <>
+      <Link className='text-white flex justify-end p-4' href="/dashboard">Back</Link>
       <div className="my-4 mx-2 sm:mx-4 md:mx-6 lg:mx-auto p-4 sm:p-6 md:p-8 bg-gray-800 text-gray-100 rounded-lg shadow-md w-full max-w-full md:max-w-6xl">
         <Header user={session.user} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">

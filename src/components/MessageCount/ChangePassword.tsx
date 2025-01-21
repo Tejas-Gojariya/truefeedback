@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff } from 'lucide-react';
-import { FaXTwitter, FaLinkedinIn, FaDiscord, FaDribbble } from "react-icons/fa6";
+// import { FaXTwitter, FaLinkedinIn, FaDiscord, FaDribbble } from "react-icons/fa6";
 
 export default function ChangePassword() {
   const { data: session } = useSession();
@@ -15,12 +15,12 @@ export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [socialLinks, setSocialLinks] = useState({
-    linkedin: '',
-    x: '',
-    discord: '',
-    dribbble: '',
-  });
+  // const [socialLinks, setSocialLinks] = useState({
+  //   linkedin: '',
+  //   x: '',
+  //   discord: '',
+  //   dribbble: '',
+  // });
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -84,16 +84,16 @@ export default function ChangePassword() {
     }
   };
 
-  const handleSocialLinksSave = () => {
-    console.log('Social Links:', socialLinks);
-    setSocialLinks({ linkedin: '', x: '', discord: '', dribbble: '' });
-    toast({
-      title: 'Success',
-      description: 'Social links saved successfully',
-      variant: 'default',
-      className: 'bg-white text-black',
-    });
-  };
+  // const handleSocialLinksSave = () => {
+  //   console.log('Social Links:', socialLinks);
+  //   setSocialLinks({ linkedin: '', x: '', discord: '', dribbble: '' });
+  //   toast({
+  //     title: 'Success',
+  //     description: 'Social links saved successfully',
+  //     variant: 'default',
+  //     className: 'bg-white text-black',
+  //   });
+  // };
 
   return (
     <div className="container mx-auto p-4 grid gap-6 lg:grid-cols-2">
@@ -147,7 +147,7 @@ export default function ChangePassword() {
         </CardContent>
       </Card>
 
-      <Card className="shadow-md bg-gray-700 border-none text-white">
+      {/* <Card className="shadow-md bg-gray-700 border-none text-white">
         <CardHeader>
           <CardTitle className="text-lg font-bold">Social Media Profiles</CardTitle>
         </CardHeader>
@@ -173,7 +173,7 @@ export default function ChangePassword() {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

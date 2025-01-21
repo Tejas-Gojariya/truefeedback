@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ user }: HeaderProps) => {
     return (
-        <header className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4 sm:gap-0">
+        <header className="flex sm:flex-row items-center justify-between mb-6 gap-4 sm:gap-0">
             {/* User Greeting */}
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <h1 className="text-2xl sm:text-2xl lg:text-3xl pb-4 font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-start">
