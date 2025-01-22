@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { Trash2 } from 'lucide-react';
@@ -31,7 +31,6 @@ type MessageCardProps = {
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
     const { toast } = useToast();
-    const [showShareOptions, setShowShareOptions] = useState(false);
 
     const handleDeleteConfirm = async () => {
         try {
@@ -127,9 +126,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                             {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
                         </p>
                         <p
-                            className="hover:text-white cursor-pointer"
-                            onClick={() => setShowShareOptions((prev) => !prev)}
-                        >
+                            className="hover:text-white cursor-pointer"                        >
                             <BsTwitterX className='w-5 h-5 cursor-pointer' onClick={() => handleShare('twitter')} />
                         </p>
                         {/* {showShareOptions && (

@@ -57,7 +57,7 @@ const MessageCount = () => {
       ) : messageCount !== null ? (
         <MessageCountDisplay count={messageCount} />
       ) : (
-        < message="Failed to load message count." />
+        <p>Failed to load message count.</p>
       )}
     </div>
   );

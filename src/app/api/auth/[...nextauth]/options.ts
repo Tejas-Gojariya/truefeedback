@@ -48,8 +48,7 @@ export const authOptions: NextAuthOptions = {
           if (!isPasswordCorrect) {
             throw new Error('Incorrect password');
           }
-          const { password, ...userWithoutPassword } = user.toObject();
-          return userWithoutPassword as Omit<User, 'password'>;
+          return user.toObject() as Omit<User, 'password'>;
         } catch (err) {
           console.error('Error during authorization:', err);
           throw new Error('Authorization failed');

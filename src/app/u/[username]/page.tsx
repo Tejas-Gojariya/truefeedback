@@ -46,7 +46,7 @@ export default function SendMessage() {
     } finally {
       setIsSuggestLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     fetchSuggestedMessages();
