@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { Trash2 } from 'lucide-react';
 import { Message } from '@/model/User';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
     AlertDialog,
     AlertDialogAction,

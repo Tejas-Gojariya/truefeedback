@@ -9,7 +9,6 @@ import ErrorDisplay from '../../components/MessageCount/ErrorDisplay';
 import MessageCountDisplay from '../../components/MessageCount/MessageCountDisplay';
 import Unauthenticated from "../../components/MessageCount/Unauthenticated"
 import ChangePassword from "../../components/MessageCount/ChangePassword"
-import UserProfile from '@/components/MessageCount/UserProfile';
 import Link from 'next/link';
 
 const fetcher = async (url: string) => {
@@ -54,7 +53,6 @@ const MessageCount = () => {
             <MessageCountDisplay count={messageCount} />
           )}
         </div>
-        {/* <UserProfile /> */}
         <ChangePassword />
       </div>
     </>

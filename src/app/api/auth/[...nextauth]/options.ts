@@ -3,6 +3,19 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/model/User';
+import { Document } from 'mongoose';
+interface Credentials {
+  identifier: string;
+  password: string;
+}
+interface User extends Document {
+  _id: string;
+  email: string;
+  username: string;
+  password: string;
+  isVerified: boolean;
+  isAcceptingMessages: boolean;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials: Credentials): Promise<Omit<User, 'password'> | null> {
         await dbConnect();
         try {
           const user = await UserModel.findOne({
@@ -21,9 +34,9 @@ export const authOptions: NextAuthOptions = {
               { email: credentials.identifier },
               { username: credentials.identifier },
             ],
-          });
+          }) as User | null;
           if (!user) {
-            throw new Error('No user found with this email');
+            throw new Error('No user found with this email or username');
           }
           if (!user.isVerified) {
             throw new Error('Please verify your account before logging in');
@@ -32,13 +45,14 @@ export const authOptions: NextAuthOptions = {
             credentials.password,
             user.password
           );
-          if (isPasswordCorrect) {
-            return user;
-          } else {
+          if (!isPasswordCorrect) {
             throw new Error('Incorrect password');
           }
-        } catch (err: any) {
-          throw new Error(err);
+          const { password, ...userWithoutPassword } = user.toObject();
+          return userWithoutPassword as Omit<User, 'password'>;
+        } catch (err) {
+          console.error('Error during authorization:', err);
+          throw new Error('Authorization failed');
         }
       },
     }),
@@ -46,7 +60,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token._id = user._id?.toString(); // Convert ObjectId to string
+        token._id = user._id?.toString();
         token.isVerified = user.isVerified;
         token.isAcceptingMessages = user.isAcceptingMessages;
         token.username = user.username;
@@ -55,10 +69,13 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        session.user._id = token._id;
-        session.user.isVerified = token.isVerified;
-        session.user.isAcceptingMessages = token.isAcceptingMessages;
-        session.user.username = token.username;
+        session.user = {
+          ...session.user,
+          _id: token._id,
+          isVerified: token.isVerified,
+          isAcceptingMessages: token.isAcceptingMessages,
+          username: token.username,
+        };
       }
       return session;
     },

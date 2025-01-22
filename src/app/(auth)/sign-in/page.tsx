@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
@@ -75,7 +74,7 @@ export default function SignInForm() {
               <div className="text-center mb-6">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Welcome Back 👋</h1>
                 <p className="mt-2 text-sm md:text-base text-gray-400">
-                  Don't have an account yet?&nbsp;
+                  Don&apos;t have an account yet?
                   <a
                     className="text-blue-500 hover:underline focus:outline-none"
                     href="/sign-up"

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Header from "./Header"
 import Loader from "../../utils/Loader"
-import ErrorDisplay from './ErrorDisplay';
+// import ErrorDisplay from './ErrorDisplay';
 import MessageCountDisplay from './MessageCountDisplay';
 import Unauthenticated from './Unauthenticated';
 
