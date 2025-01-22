@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
-import { signInSchema } from '@/schemas/signInSchema';
+import { signInSchema } from '@/schemas/SignInSchema';
 import HeroSection from '@/components/HeroSection';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
