@@ -174,13 +174,13 @@ function UserDashboard() {
         <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 w-full sm:w-auto">
           <Button
             className="w-full sm:w-auto px-3 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg font-medium transition-all"
-            onClick={() => genratePDF(messages)}
+            onClick={() => genratePDF(messages, username)}
           >
             Export to PDF
           </Button>
           <Button
             className="w-full sm:w-auto px-3 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg font-medium transition-all"
-            onClick={() => generateCSV(messages)}
+            onClick={() => generateCSV(messages, username)}
           >
             Export to CSV
           </Button>
