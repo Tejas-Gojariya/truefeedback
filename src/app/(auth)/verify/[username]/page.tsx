@@ -26,8 +26,10 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { verifySchema } from "@/schemas/verifySchema";
 import HeroSection from "@/components/HeroSection";
+import { useState } from "react"
 
 export default function VerifyAccount() {
+  const [isResending, setIsResending] = useState(false);
   const router = useRouter();
   const params = useParams<{ username: string }>();
   const { toast } = useToast();
@@ -61,6 +63,32 @@ export default function VerifyAccount() {
     }
   };
 
+  const handleResendOTP = async () => {
+    setIsResending(true); // Indicate that the OTP is being resent
+    try {
+      // Call the API with resendOtp: true
+      const response = await axios.post<ApiResponse>(`/api/verify-code`, {
+        username: params.username,
+        resendOtp: true, // Resend OTP flag
+      });
+
+      toast({
+        title: "OTP Resent",
+        description: response.data.message,
+      });
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: "Failed to resend OTP",
+        description:
+          axiosError.response?.data.message ?? "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsResending(false); // Reset the resend state
+    }
+  };
+
   return (
     <HeroSection>
       <div className="flex flex-col justify-center items-center text-white">
@@ -68,10 +96,10 @@ export default function VerifyAccount() {
           {/* Header */}
           <CardHeader className="">
             <CardTitle className="text-center text-xl sm:text-2xl font-semibold text-gray-300">
-            Confirm Your Identity
+              Confirm Your Identity
             </CardTitle>
             <CardDescription className="text-center text-sm sm:text-base text-gray-500">
-            Please enter the verification code sent to your email to complete the process.
+              Please enter the verification code sent to your email to complete the process.
             </CardDescription>
           </CardHeader>
 
@@ -100,6 +128,7 @@ export default function VerifyAccount() {
                     </FormItem>
                   )}
                 />
+                <span className="text-xs text-gray-400 py-2">OTP expires in 15 minutes</span>
                 <Button
                   type="submit"
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md shadow transition-all duration-300"
@@ -117,8 +146,12 @@ export default function VerifyAccount() {
               <a
                 href="#"
                 className="text-blue-600 hover:underline font-medium"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default link behavior
+                  handleResendOTP(); // Trigger the resend OTP process
+                }}
               >
-                Resend Code
+                {isResending ? "Resending..." : "Resend Code"}
               </a>
             </p>
           </CardFooter>
