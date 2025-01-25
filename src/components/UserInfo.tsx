@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Loader2 } from 'lucide-react';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface UserData {
     userCount: number;
@@ -36,7 +36,27 @@ const UserInfo: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <p className="text-white flex justify-center"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Loading...</p>;
+        return (
+            <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
+                <div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-white">Total Feedback</h4>
+                    <Skeleton className="mt-2 sm:mt-3 h-12 sm:h-16 w-32 bg-gray-700 rounded-lg" />
+                    <Skeleton className="mt-1 h-6 w-48 bg-gray-700 rounded-lg" />
+                </div>
+
+                <div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-white">Active Users</h4>
+                    <Skeleton className="mt-2 sm:mt-3 h-12 sm:h-16 w-32 bg-gray-700 rounded-lg" />
+                    <Skeleton className="mt-1 h-6 w-48 bg-gray-700 rounded-lg" />
+                </div>
+
+                <div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-white">Satisfaction Rate</h4>
+                    <Skeleton className="mt-2 sm:mt-3 h-12 sm:h-16 w-32 bg-gray-700 rounded-lg" />
+                    <Skeleton className="mt-1 h-6 w-48 bg-gray-700 rounded-lg" />
+                </div>
+            </div>
+        );
     }
 
     if (error) {
