@@ -6,7 +6,7 @@ const HeroSection = ({ children }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Ensure client-specific rendering
+    setIsClient(true);
   }, []);
 
   return (

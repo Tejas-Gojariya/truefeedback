@@ -30,7 +30,8 @@ const features = [
   {
     icon: Heart,
     title: "Custom Branding",
-    description: "Make the platform yours with customizable themes and branding options."
+    description: "Make the platform yours with customizable themes and branding options.",
+    liveSoon: true,
   }
 ];
 
@@ -49,7 +50,9 @@ export function Features() {
                 <feature.icon className="w-6 h-6 text-indigo-500" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
+              <p className="text-gray-400">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
