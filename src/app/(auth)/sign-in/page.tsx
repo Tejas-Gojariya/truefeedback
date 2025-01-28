@@ -19,10 +19,12 @@ import { signInSchema } from '@/schemas/SignInSchema';
 import HeroSection from '@/components/HeroSection';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 export default function SignInForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -38,11 +40,14 @@ export default function SignInForm() {
 
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+    setLoading(true); // Show loader
     const result = await signIn('credentials', {
       redirect: false,
       identifier: data.identifier,
       password: data.password,
     });
+
+    setLoading(false) // Hide loader once the API call is done
 
     if (result?.error) {
       if (result.error === 'CredentialsSignin') {
@@ -151,9 +156,14 @@ export default function SignInForm() {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
+                  className="w-full py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 flex items-center justify-center"
+                  disabled={loading} // Disable button while loading
                 >
-                  Sign In
+                  {loading ? (
+                    <Loader2 className="animate-spin h-5 w-5" />
+                  ) : (
+                    'Sign In'
+                  )}
                 </Button>
               </div>
             </div>

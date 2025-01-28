@@ -27,9 +27,11 @@ import * as z from "zod";
 import { verifySchema } from "@/schemas/verifySchema";
 import HeroSection from "@/components/HeroSection";
 import { useState } from "react"
+import { Loader2 } from 'lucide-react';
 
 export default function VerifyAccount() {
   const [isResending, setIsResending] = useState(false);
+  const [loading, setLoading] = useState(false)
   const router = useRouter();
   const params = useParams<{ username: string }>();
   const { toast } = useToast();
@@ -39,6 +41,8 @@ export default function VerifyAccount() {
   });
 
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
+    setLoading(true); // Show loader
+
     try {
       const response = await axios.post<ApiResponse>(`/api/verify-code`, {
         username: params.username,
@@ -50,6 +54,7 @@ export default function VerifyAccount() {
         description: response.data.message,
       });
 
+      setLoading(false) // Hide loader once the API call is done
       router.replace("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -132,8 +137,13 @@ export default function VerifyAccount() {
                 <Button
                   type="submit"
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md shadow transition-all duration-300"
+                  disabled={loading}
                 >
-                  Verify
+                  {loading ? (
+                    <Loader2 className="animate-spin h-5 w-5" />
+                  ) : (
+                    'Verify'
+                  )}
                 </Button>
               </form>
             </Form>
