@@ -23,6 +23,11 @@ import { ApiResponse } from '@/types/ApiResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Command, CommandItem } from '@/components/ui/command';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'; // Make sure to import the necessary components
+
+
 
 export default function SendMessage() {
   const [rating, setRating] = useState<number | null>(null);
@@ -30,6 +35,9 @@ export default function SendMessage() {
   const username = params.username;
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
   const [suggestedMessages, setSuggestedMessages] = useState<{ messageId: string, messageText: string }[]>([]);
+  // const [category, setCategory] = useState("suggestion")
+  const [category, setCategory] = useState("Suggestions");
+
 
   const fetchSuggestedMessages = useCallback(async () => {
     setIsSuggestLoading(true);
@@ -66,18 +74,22 @@ export default function SendMessage() {
 
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
+    console.log("hello");
+
     try {
       const response = await axios.post<ApiResponse>('/api/send-message', {
         ...data,
         username,
         rating,
+        category
       });
+      console.log(response)
 
       toast({
         title: response.data.message,
         variant: 'default',
       });
-      form.reset({ ...form.getValues(), content: '' });
+      form.reset({ ...form.getValues(), content: '', });
       setRating(null);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -133,6 +145,20 @@ export default function SendMessage() {
                       </div>
                     </div>
                   </div>
+                  <span className='text-white'>Select Category</span>
+                  {/* Replace the above select with ShadCN Select */}
+                  <Select value={category} onValueChange={setCategory}>
+                    <SelectTrigger className="block w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                      <SelectValue placeholder="Select a Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Suggestions">Suggestions</SelectItem>
+                      <SelectItem value="Bugs">Bugs</SelectItem>
+                      <SelectItem value="Success">Success</SelectItem>
+                      <SelectItem value="Questions">Questions</SelectItem>
+                      <SelectItem value="Genral Feedbacks">General Feedbacks</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
