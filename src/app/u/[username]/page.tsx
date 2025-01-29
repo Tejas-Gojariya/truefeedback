@@ -23,9 +23,7 @@ import { ApiResponse } from '@/types/ApiResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { Command, CommandItem } from '@/components/ui/command';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'; // Make sure to import the necessary components
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
 
 
@@ -35,9 +33,7 @@ export default function SendMessage() {
   const username = params.username;
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
   const [suggestedMessages, setSuggestedMessages] = useState<{ messageId: string, messageText: string }[]>([]);
-  // const [category, setCategory] = useState("suggestion")
-  const [category, setCategory] = useState("Suggestions");
-
+  const [category, setCategory] = useState("");
 
   const fetchSuggestedMessages = useCallback(async () => {
     setIsSuggestLoading(true);
@@ -74,7 +70,6 @@ export default function SendMessage() {
 
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
-    console.log("hello");
 
     try {
       const response = await axios.post<ApiResponse>('/api/send-message', {
@@ -83,7 +78,6 @@ export default function SendMessage() {
         rating,
         category
       });
-      console.log(response)
 
       toast({
         title: response.data.message,
@@ -154,7 +148,7 @@ export default function SendMessage() {
                     <SelectContent>
                       <SelectItem value="Suggestions">Suggestions</SelectItem>
                       <SelectItem value="Bugs">Bugs</SelectItem>
-                      <SelectItem value="Success">Success</SelectItem>
+                      <SelectItem value="success">Success</SelectItem>
                       <SelectItem value="Questions">Questions</SelectItem>
                       <SelectItem value="Genral Feedbacks">General Feedbacks</SelectItem>
                     </SelectContent>

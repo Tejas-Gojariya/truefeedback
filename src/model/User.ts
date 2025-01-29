@@ -23,7 +23,7 @@ const MessageSchema: Schema<Message> = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Suggestions", "Bugs", "success", "Questions", "Genral Feedbacks"],
+    enum: ["Suggestions", "Bugs", "success", "Questions", "Genral Feedbacks", "Customer surveys"],
     required: true
   }
 });

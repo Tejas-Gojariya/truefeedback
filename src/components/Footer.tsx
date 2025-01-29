@@ -1,5 +1,6 @@
 import React from 'react'
 import { Twitter, Github, Linkedin } from 'lucide-react';
+import Link from 'next/link'
 
 const Footer = () => {
     return (
@@ -26,19 +27,19 @@ const Footer = () => {
                     <div>
                         <h4 className="font-semibold text-white mb-4">Product</h4>
                         <ul className="space-y-3 text-gray-400">
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Features</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Pricing</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Security</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Enterprise</a></li>
+                            <li><Link href="#" className="hover:text-indigo-400 transition-colors">Features</Link></li>
+                            <li><Link href="#" className="hover:text-indigo-400 transition-colors">Pricing</Link></li>
+                            <li><Link href="#" className="hover:text-indigo-400 transition-colors">Security</Link></li>
+                            <li><Link href="#" className="hover:text-indigo-400 transition-colors">Enterprise</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="font-semibold text-white mb-4">Company</h4>
                         <ul className="space-y-3 text-gray-400">
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">About</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Support</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Blog</a></li>
-                            <li><a href="#" className="hover:text-indigo-400 transition-colors">Terms</a></li>
+                            <li><Link href="/about" className="hover:text-indigo-400 transition-colors">About</Link></li>
+                            <li><Link href="/support" className="hover:text-indigo-400 transition-colors">Support</Link></li>
+                            <li><Link href="/blog" className="hover:text-indigo-400 transition-colors">Blog</Link></li>
+                            <li><Link href="/terms" className="hover:text-indigo-400 transition-colors">Terms</Link></li>
                         </ul>
                     </div>
                 </div>
