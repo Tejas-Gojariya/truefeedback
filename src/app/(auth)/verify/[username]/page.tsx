@@ -38,6 +38,7 @@ export default function VerifyAccount() {
 
   const form = useForm<z.infer<typeof verifySchema>>({
     resolver: zodResolver(verifySchema),
+    defaultValues: { code: "" },
   });
 
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
@@ -125,6 +126,7 @@ export default function VerifyAccount() {
                       </FormLabel>
                       <Input
                         {...field}
+                        value={field.value ?? ""}
                         placeholder="Enter 6-digit code"
                         maxLength={6}
                         className="text-center bg-gray-700 border-gray-600 text-white focus:border-blue-500"
