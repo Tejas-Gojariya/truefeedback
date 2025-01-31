@@ -19,11 +19,13 @@ import { genratePDF } from '../../../helpers/pdfGenerator';
 import { generateCSV } from '../../../helpers/csvGenerator';
 import Link from 'next/link';
 import ErrorMessage from '@/components/ErrorMessage';
+import QRModal from "@/helpers/QRModal";
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+  const [showQR, setShowQR] = useState(false);
 
   const { toast } = useToast();
 
@@ -137,6 +139,10 @@ function UserDashboard() {
     });
   };
 
+  // const showQR = () => {
+  //   console.log("show qr")
+  // }
+
   return (
     <div className="my-4 mx-2 sm:mx-4 md:mx-6 lg:mx-auto p-4 sm:p-6 md:p-8 bg-gray-800 text-gray-100 rounded-lg shadow-md w-full max-w-full md:max-w-6xl">
       <div className='flex justify-between items-center'>
@@ -160,11 +166,20 @@ function UserDashboard() {
             className="w-full p-2 sm:p-3 bg-gray-700 text-gray-400 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <Button
-            className="w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-2 bg-purple-500 text-white hover:bg-purple-600 rounded-lg font-medium transition-all"
+            className="w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-2 bg-purple-600 text-white hover:bg-purple-800 rounded-lg font-medium transition-all"
             onClick={copyToClipboard}
           >
             Copy
+
           </Button>
+          <Button
+            className="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white hover:bg-purple-800 rounded-lg font-medium transition-all"
+            onClick={() => setShowQR(true)}
+          >
+            Show QR
+          </Button>
+
+          {showQR && <QRModal url={profileUrl} username={username} onClose={() => setShowQR(false)} />}
         </div>
       </div>
 
