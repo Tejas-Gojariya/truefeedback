@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import { User } from 'next-auth'
+import { CiMenuFries } from "react-icons/ci";
+import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -14,12 +16,12 @@ const Navbar = () => {
     setIsMenuOpen((prev) => !prev);
   };
   return (
-    <nav className="p-4 flex md:p-6 bg-gradient-to-r from-gray-800 to-gray-900 shadow-lg text-white">
+    <nav className="p-4 flex md:p-6 bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg text-white">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         {/* Logo */}
         <a
           href="#"
-          className="text-2xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent mb-4 md:mb-0 hover:scale-105 transition-transform duration-300 ml-4"
+          className="text-2xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent mb-0 md:mb-0 hover:scale-105 transition-transform duration-300 ml-4"
         >
           True Feedback
         </a>
@@ -31,35 +33,9 @@ const Navbar = () => {
           onClick={toggleMenu}
         >
           {isMenuOpen ? (
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <RxCross2 className="w-6 h-6" />
           ) : (
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <CiMenuFries className="w-6 h-6" />
           )}
         </button>
 
