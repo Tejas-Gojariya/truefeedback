@@ -149,7 +149,7 @@ function UserDashboard() {
         <h1 className="text-2xl sm:text-2xl lg:text-3xl pb-4 font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-start">
           User Dashboard
         </h1>
-        <Link href="/Profile">
+        <Link href="/profile">
           <Button className='font-semibold hover:bg-slate-900'>Profile</Button>
         </Link>
       </div>

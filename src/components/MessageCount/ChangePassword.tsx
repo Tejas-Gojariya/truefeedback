@@ -26,7 +26,9 @@ export default function ChangePassword() {
     setShowPassword((prev) => !prev);
   };
 
-  const handleChangePassword = async () => {
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+
     if (!user?.email) {
       toast({
         title: 'Error',
@@ -103,7 +105,7 @@ export default function ChangePassword() {
         </CardHeader>
 
         <CardContent>
-          <div className="space-y-4">
+          <form onSubmit={handleChangePassword} className="space-y-4">
             <Input
               className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
               value={user?.username || 'Name not available'}
@@ -113,6 +115,7 @@ export default function ChangePassword() {
               className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
               value={user?.email || 'Email not available'}
               disabled
+              autoComplete="email"
             />
 
             <Input
@@ -121,6 +124,7 @@ export default function ChangePassword() {
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500'
+              autoComplete="current-password"
             />
 
             <div className="relative">
@@ -130,6 +134,7 @@ export default function ChangePassword() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 className='w-full p-2 sm:p-3 text-gray-200 bg-transparent border border-gray-500 rounded-lg'
+                autoComplete="new-password"
               />
               <button
                 type="button"
@@ -140,10 +145,10 @@ export default function ChangePassword() {
               </button>
             </div>
 
-            <Button onClick={handleChangePassword} className="w-full">
+            <Button type="submit" className="w-full">
               Change Password
             </Button>
-          </div>
+          </form>
         </CardContent>
       </Card>
 
