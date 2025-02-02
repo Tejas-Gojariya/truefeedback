@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export function CTA() {
   return (
-    <div className="py-24 bg-gradient-to-t from-gray-900 to-indigo-950">
+    <div className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gray-800 p-12 rounded-3xl border border-indigo-500/30">
           <div className="text-center max-w-3xl mx-auto">

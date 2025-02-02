@@ -112,13 +112,18 @@ export default function SignInForm() {
                 </div> */}
 
                 {/* Email/Username Field */}
+                {/* Email/Username Field */}
                 <FormField
                   name="identifier"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem className="pb-4">
-                      <FormLabel className="text-sm text-gray-300">Email/Username</FormLabel>
+                      <FormLabel htmlFor="identifier" className="text-sm text-gray-300">
+                        Email/Username
+                      </FormLabel>
                       <Input
+                        id="identifier"
+                        autoComplete="username" // ✅ Helps autofill email/username
                         className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                         {...field}
                       />
@@ -133,10 +138,14 @@ export default function SignInForm() {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem className="pb-6 relative">
-                      <FormLabel className="text-sm text-gray-300">Password</FormLabel>
+                      <FormLabel htmlFor="password" className="text-sm text-gray-300">
+                        Password
+                      </FormLabel>
                       <div className="relative">
                         <Input
+                          id="password"
                           type={showPassword ? "text" : "password"}
+                          autoComplete="current-password"
                           className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                           {...field}
                         />
