@@ -74,21 +74,15 @@ const Support = () => {
               </div>
             </div>
             <p className="text-gray-300 text-lg">
-              Have a project in mind or just want to say hello? We'd love to hear from you. Fill out the form, and we'll
-              get back to you as soon as possible.
+              Welcome to the support page of TrueFeedback. If you have any questions, issues, or feedback, we’re here to help! Below, you’ll find answers to common questions and ways to get in touch with our support team.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <div className="bg-gray-800 p-3 rounded-full">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-white">hello@example.com</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="bg-gray-800 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-white">+1 (555) 123-4567</span>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejasgojariya036@gmail.com"
+                  target="_blank" className="text-white">tejasgojariya036@gmail.com</a>
               </div>
             </div>
           </div>

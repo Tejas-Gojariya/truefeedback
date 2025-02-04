@@ -1,14 +1,28 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { HomeIcon, MoveLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function NotFound() {
+    const [stars, setStars] = useState<{ top: string; left: string; delay: string; duration: string }[]>([]);
+
+    useEffect(() => {
+        setStars([...Array(30)].map(() => ({
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            delay: `${Math.random() * 3}s`,
+            duration: `${1 + Math.random() * 2}s`,
+        })));
+    }, []);
+
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-[#030014] p-4 relative overflow-hidden">
-            {/* Space background with stars */}
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20" />
+            {/* Space background */}
+            <div className="absolute inset-0 bg-cover bg-center opacity-20"
+                style={{ backgroundImage: "url('/space-bg.jpg')" }}
+            />
 
             {/* Animated nebula effects */}
             <div className="absolute inset-0 overflow-hidden">
@@ -40,7 +54,9 @@ export default function NotFound() {
                             <span>Return Home</span>
                         </Link>
                         <button
-                            onClick={() => window.history.back()}
+                            onClick={() => {
+                                if (typeof window !== "undefined") window.history.back();
+                            }}
                             className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-200 gap-2 hover:gap-3 backdrop-blur-sm"
                         >
                             <MoveLeft className="w-4 h-4" />
@@ -67,17 +83,17 @@ export default function NotFound() {
                 </div>
             </div>
 
-            {/* Enhanced animated stars */}
+            {/* Animated stars */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(30)].map((_, i) => (
+                {stars.map((star, i) => (
                     <div
                         key={i}
                         className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
                         style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 3}s`,
-                            animationDuration: `${1 + Math.random() * 2}s`,
+                            top: star.top,
+                            left: star.left,
+                            animationDelay: star.delay,
+                            animationDuration: star.duration,
                         }}
                     />
                 ))}
