@@ -1,9 +1,15 @@
+import { useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
-import { X, Download, Share2 } from "lucide-react"
+import { X, Download, Share2 } from "lucide-react";
 
 const QRModal = ({ url, username, onClose }) => {
+  const qrRef = useRef(null); // Create a ref for the QRCodeCanvas
   const downloadQR = () => {
-    const canvas = document.querySelector("canvas");
+    if (!qrRef.current) return;
+
+    const canvas = qrRef.current.querySelector("canvas");
+    if (!canvas) return;
+
     const qrUrl = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.href = qrUrl;
@@ -20,7 +26,7 @@ const QRModal = ({ url, username, onClose }) => {
         className="bg-gray-600 rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="bg-gray-100 p-8 flex flex-col justify-center items-center">
-            <div className="bg-white p-4 rounded-xl shadow-md">
+            <div ref={qrRef} className="bg-white p-4 rounded-xl shadow-md">
               <QRCodeCanvas value={url} size={200} level="H" />
             </div>
             <p className="mt-4 text-sm text-white text-center">Scan and share your feedback</p>
@@ -34,7 +40,7 @@ const QRModal = ({ url, username, onClose }) => {
                 <X className="text-white" size={24} />
               </button>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-400 mb-8">
               Your unique QR code has been generated. You can download it or share the link directly.
             </p>
             <div className="space-y-4 mt-auto">
