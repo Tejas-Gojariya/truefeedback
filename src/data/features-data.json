@@ -1,0 +1,34 @@
+[
+    {
+        "icon": "Shield",
+        "title": "100% Anonymous",
+        "description": "Your identity remains completely private. We never collect or store personal information."
+    },
+    {
+        "icon": "Zap",
+        "title": "Instant Delivery",
+        "description": "Messages are delivered instantly. No delays, no waiting. Real-time feedback when it matters."
+    },
+    {
+        "icon": "Lock",
+        "title": "Enterprise Security",
+        "description": "Bank-grade encryption ensures your messages remain confidential and secure."
+    },
+    {
+        "icon": "Globe2",
+        "title": "Global Reach",
+        "description": "Connect with team members across different time zones and languages."
+    },
+    {
+        "icon": "Users",
+        "title": "Team Analytics",
+        "description": "Gain insights from feedback patterns and improve team dynamics.",
+        "liveSoon": true
+    },
+    {
+        "icon": "Heart",
+        "title": "Custom Branding",
+        "description": "Make the platform yours with customizable themes and branding options.",
+        "liveSoon": true
+    }
+]

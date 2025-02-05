@@ -58,7 +58,10 @@ export const genratePDF = (messages, username) => {
     },
     bodyStyles: {
       fontSize: 10,
-      textColor: '#333333', // Dark grey for text
+      textColor: '#333333',
+      halign: 'center', // Align text in the center if necessary
+      valign: 'middle',
+      lineWidth: 0.5,
     },
     alternateRowStyles: {
       fillColor: [245, 245, 245], // Light grey for alternate rows
@@ -67,11 +70,12 @@ export const genratePDF = (messages, username) => {
       cellPadding: 5,
     },
     columnStyles: {
-      0: { cellWidth: 40 }, // Adjust column widths
-      1: { cellWidth: 70 },
-      2: { cellWidth: 20 },
-      3: { cellWidth: 50 },
+      0: { cellWidth: 'auto' },
+      1: { cellWidth: 'auto' },
+      2: { cellWidth: 'auto' },
+      3: { cellWidth: 'auto' },
     },
+    tableWidth: 'auto',
   });
 
   // Add Footer

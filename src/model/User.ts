@@ -4,6 +4,7 @@ export interface Message extends Document {
   content: string;
   createdAt: Date;
   rating: number;
+  category: string,
 }
 
 const MessageSchema: Schema<Message> = new mongoose.Schema({
@@ -19,6 +20,11 @@ const MessageSchema: Schema<Message> = new mongoose.Schema({
   rating: {
     type: Number,
     required: true,
+  },
+  category: {
+    type: String,
+    enum: ["Suggestions", "Bugs", "success", "Questions", "Genral Feedbacks", "Customer surveys"],
+    required: true
   }
 });
 
@@ -31,7 +37,7 @@ export interface User extends Document {
   isVerified: boolean;
   isAcceptingMessages: boolean;
   messages: Message[];
-  socialLinks : {
+  socialLinks: {
     linkedin?: string;
     x?: string;
     discord?: string;
@@ -74,11 +80,11 @@ const UserSchema: Schema<User> = new mongoose.Schema({
     default: true,
   },
   messages: [MessageSchema],
-  socialLinks : {
-    linkedin: {type: String, default: ''},
-    x: {type: String, default: ''},
-    discord: {type: String, default: ''},
-    dribbble: {type: String, default: ''},
+  socialLinks: {
+    linkedin: { type: String, default: '' },
+    x: { type: String, default: '' },
+    discord: { type: String, default: '' },
+    dribbble: { type: String, default: '' },
   }
 });
 

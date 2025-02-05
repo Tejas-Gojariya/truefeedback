@@ -19,10 +19,13 @@ import { signInSchema } from '@/schemas/SignInSchema';
 import HeroSection from '@/components/HeroSection';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SignInForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -38,11 +41,14 @@ export default function SignInForm() {
 
   const { toast } = useToast();
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+    setLoading(true); // Show loader
     const result = await signIn('credentials', {
       redirect: false,
       identifier: data.identifier,
       password: data.password,
     });
+
+    setLoading(false) // Hide loader once the API call is done
 
     if (result?.error) {
       if (result.error === 'CredentialsSignin') {
@@ -75,12 +81,12 @@ export default function SignInForm() {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Welcome Back 👋</h1>
                 <p className="mt-2 text-sm md:text-base text-gray-400">
                   Don&apos;t have an account yet?
-                  <a
+                  <Link
                     className="text-blue-500 hover:underline focus:outline-none"
                     href="/sign-up"
                   >
                     Sign Up
-                  </a>
+                  </Link>
                 </p>
               </div>
 
@@ -107,13 +113,18 @@ export default function SignInForm() {
                 </div> */}
 
                 {/* Email/Username Field */}
+                {/* Email/Username Field */}
                 <FormField
                   name="identifier"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem className="pb-4">
-                      <FormLabel className="text-sm text-gray-300">Email/Username</FormLabel>
+                      <FormLabel htmlFor="identifier" className="text-sm text-gray-300">
+                        Email/Username
+                      </FormLabel>
                       <Input
+                        id="identifier"
+                        autoComplete="username" // ✅ Helps autofill email/username
                         className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                         {...field}
                       />
@@ -128,10 +139,14 @@ export default function SignInForm() {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem className="pb-6 relative">
-                      <FormLabel className="text-sm text-gray-300">Password</FormLabel>
+                      <FormLabel htmlFor="password" className="text-sm text-gray-300">
+                        Password
+                      </FormLabel>
                       <div className="relative">
                         <Input
+                          id="password"
                           type={showPassword ? "text" : "password"}
+                          autoComplete="current-password"
                           className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                           {...field}
                         />
@@ -151,9 +166,14 @@ export default function SignInForm() {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
+                  className="w-full py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 flex items-center justify-center"
+                  disabled={loading} // Disable button while loading
                 >
-                  Sign In
+                  {loading ? (
+                    <Loader2 className="animate-spin h-5 w-5" />
+                  ) : (
+                    'Sign In'
+                  )}
                 </Button>
               </div>
             </div>

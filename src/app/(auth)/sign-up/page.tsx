@@ -24,6 +24,8 @@ import { useRouter } from 'next/navigation';
 import { signUpSchema } from '@/schemas/signUpSchema';
 import HeroSection from '@/components/HeroSection';
 import { Eye, EyeOff } from 'lucide-react';
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 export default function SignUpForm() {
   const [username, setUsername] = useState('');
@@ -111,14 +113,22 @@ export default function SignUpForm() {
           <div className="max-w-md mx-auto p-6 sm:p-8 bg-gray-900 rounded-2xl shadow-lg">
             <div className="text-center mb-6">
               <h1 className="text-3xl sm:text-4xl font-semibold text-white">Create New Account</h1>
+              <div className="mt- text-white"></div>
+              <button
+                type="button"
+                className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-700 bg-gray-800 text-gray-200 shadow-sm hover:bg-gray-700 focus:outline-none focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
+              >
+                <FcGoogle className="h-6 w-6" />
+                Sign up with Google
+              </button>
               <p className="mt-2 text-sm sm:text-base text-gray-400">
                 Already a member? &nbsp;
-                <a
+                <Link
                   className="text-blue-500 hover:underline"
                   href="/sign-in"
                 >
                   Log in
-                </a>
+                </Link>
               </p>
             </div>
 
@@ -129,8 +139,10 @@ export default function SignUpForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-sm text-gray-300">Username</FormLabel>
+                    <FormLabel htmlFor="username" className="text-sm text-gray-300">Username</FormLabel>
                     <Input
+                      id="username"
+                      autoComplete="username"
                       {...field}
                       onChange={(e) => {
                         field.onChange(e);
@@ -138,16 +150,9 @@ export default function SignUpForm() {
                       }}
                       className="w-full p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
-                    {isCheckingUsername && (
-                      <Loader2 className="animate-spin text-blue-500" />
-                    )}
+                    {isCheckingUsername && <Loader2 className="animate-spin text-blue-500" />}
                     {!isCheckingUsername && usernameMessage && (
-                      <p
-                        className={`text-sm mt-1 ${usernameMessage === "Username is unique"
-                          ? "text-green-500"
-                          : "text-red-500"
-                          }`}
-                      >
+                      <p className={`text-sm mt-1 ${usernameMessage === "Username is unique" ? "text-green-500" : "text-red-500"}`}>
                         {usernameMessage}
                       </p>
                     )}
@@ -162,10 +167,11 @@ export default function SignUpForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-sm text-gray-300">Email</FormLabel>
+                    <FormLabel htmlFor="email" className="text-sm text-gray-300">Email</FormLabel>
                     <Input
+                      id="email"
+                      autoComplete="email"
                       {...field}
-                      name="email"
                       className="w-full p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
                     <p className="text-xs text-gray-500">We will send you a verification code</p>
@@ -180,10 +186,12 @@ export default function SignUpForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="space-y-2 relative">
-                    <FormLabel className="text-sm text-gray-300">Password</FormLabel>
+                    <FormLabel htmlFor="password" className="text-sm text-gray-300">Password</FormLabel>
                     <div className="relative">
                       <Input
+                        id="password"
                         type={showPassword ? "text" : "password"}
+                        autoComplete="current-password"
                         className="w-full p-2 sm:p-3 text-gray-300 bg-transparent border border-gray-500 rounded-lg focus:ring-2 focus:ring-blue-500"
                         {...field}
                       />

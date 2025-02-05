@@ -27,18 +27,24 @@ import * as z from "zod";
 import { verifySchema } from "@/schemas/verifySchema";
 import HeroSection from "@/components/HeroSection";
 import { useState } from "react"
+import { Loader2 } from 'lucide-react';
+import Link from "next/link";
 
 export default function VerifyAccount() {
   const [isResending, setIsResending] = useState(false);
+  const [loading, setLoading] = useState(false)
   const router = useRouter();
   const params = useParams<{ username: string }>();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof verifySchema>>({
     resolver: zodResolver(verifySchema),
+    defaultValues: { code: "" },
   });
 
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
+    setLoading(true); // Show loader
+
     try {
       const response = await axios.post<ApiResponse>(`/api/verify-code`, {
         username: params.username,
@@ -50,6 +56,7 @@ export default function VerifyAccount() {
         description: response.data.message,
       });
 
+      setLoading(false) // Hide loader once the API call is done
       router.replace("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -120,6 +127,7 @@ export default function VerifyAccount() {
                       </FormLabel>
                       <Input
                         {...field}
+                        value={field.value ?? ""}
                         placeholder="Enter 6-digit code"
                         maxLength={6}
                         className="text-center bg-gray-700 border-gray-600 text-white focus:border-blue-500"
@@ -132,8 +140,13 @@ export default function VerifyAccount() {
                 <Button
                   type="submit"
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md shadow transition-all duration-300"
+                  disabled={loading}
                 >
-                  Verify
+                  {loading ? (
+                    <Loader2 className="animate-spin h-5 w-5" />
+                  ) : (
+                    'Verify'
+                  )}
                 </Button>
               </form>
             </Form>
@@ -143,7 +156,7 @@ export default function VerifyAccount() {
           <CardFooter className="text-center p-4">
             <p className="text-sm text-gray-500">
               Didn’t receive the code?{" "}
-              <a
+              <Link
                 href="#"
                 className="text-blue-600 hover:underline font-medium"
                 onClick={(e) => {
@@ -152,7 +165,7 @@ export default function VerifyAccount() {
                 }}
               >
                 {isResending ? "Resending..." : "Resend Code"}
-              </a>
+              </Link>
             </p>
           </CardFooter>
         </Card>
