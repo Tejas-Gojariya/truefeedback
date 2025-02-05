@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supportSchema } from "@/schemas/supportSchema";
 import { z } from "zod";
+import Link from 'next/link';
 
 type SupportFormData = z.infer<typeof supportSchema>;
 
@@ -81,8 +82,8 @@ const Support = () => {
                 <div className="bg-gray-800 p-3 rounded-full">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejasgojariya036@gmail.com"
-                  target="_blank" className="text-white">tejasgojariya036@gmail.com</a>
+                <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=tejasgojariya036@gmail.com"
+                  target="_blank" className="text-white">tejasgojariya036@gmail.com</Link>
               </div>
             </div>
           </div>

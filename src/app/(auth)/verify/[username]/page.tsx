@@ -28,6 +28,7 @@ import { verifySchema } from "@/schemas/verifySchema";
 import HeroSection from "@/components/HeroSection";
 import { useState } from "react"
 import { Loader2 } from 'lucide-react';
+import Link from "next/link";
 
 export default function VerifyAccount() {
   const [isResending, setIsResending] = useState(false);
@@ -155,7 +156,7 @@ export default function VerifyAccount() {
           <CardFooter className="text-center p-4">
             <p className="text-sm text-gray-500">
               Didn’t receive the code?{" "}
-              <a
+              <Link
                 href="#"
                 className="text-blue-600 hover:underline font-medium"
                 onClick={(e) => {
@@ -164,7 +165,7 @@ export default function VerifyAccount() {
                 }}
               >
                 {isResending ? "Resending..." : "Resend Code"}
-              </a>
+              </Link>
             </p>
           </CardFooter>
         </Card>

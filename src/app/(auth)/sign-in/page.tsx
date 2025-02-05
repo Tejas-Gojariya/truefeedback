@@ -20,6 +20,7 @@ import HeroSection from '@/components/HeroSection';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SignInForm() {
   const router = useRouter();
@@ -80,12 +81,12 @@ export default function SignInForm() {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Welcome Back 👋</h1>
                 <p className="mt-2 text-sm md:text-base text-gray-400">
                   Don&apos;t have an account yet?
-                  <a
+                  <Link
                     className="text-blue-500 hover:underline focus:outline-none"
                     href="/sign-up"
                   >
                     Sign Up
-                  </a>
+                  </Link>
                 </p>
               </div>
 
