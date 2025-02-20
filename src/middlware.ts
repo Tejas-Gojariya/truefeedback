@@ -14,7 +14,7 @@ export async function middleware(request : NextRequest) {
             url.pathname.startsWith('/sign-up') ||
             url.pathname.startsWith('/verify') ||
             url.pathname.startsWith('/') ||
-            url.pathname.startsWith('/Profile')
+            url.pathname.startsWith('/profile')
 
         )
     ) {
@@ -32,6 +32,6 @@ export const config = {
         "/",
         "/dashboard/:path*",
         "/verify/:path*",
-        "Profile",
+        "profile",
     ],
 }
