@@ -123,7 +123,19 @@ function UserDashboard() {
   };
 
   if (!session || !session.user) {
-    return <div></div>;
+    return (
+      <div className="flex flex-col items-center justify-center text-center pt-16">
+        <div className="text-white rounded-2xl shadow-xl text-center">
+          <h1 className="text-2xl font-semibold">You have been logged out</h1>
+          <p className="text-gray-400 mt-2">Thank you for visiting. See you again soon!</p>
+          <Link href="/">
+            <Button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+              Go to Homepage
+            </Button>
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   const { username } = session.user as User;

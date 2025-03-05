@@ -21,11 +21,11 @@ const QRModal = ({ url, username, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+      className="fixed  inset-0 flex items-center justify-center bg-gray-000 bg-opacity-50 backdrop-blur-sm z-50">
       <div
-        className="bg-gray-600 rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden">
+        className="bg-gray-900 rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-gray-100 p-8 flex flex-col justify-center items-center">
+          <div className=" p-8 flex flex-col justify-center items-center">
             <div ref={qrRef} className="bg-white p-4 rounded-xl shadow-md">
               <QRCodeCanvas value={url} size={200} level="H" />
             </div>
