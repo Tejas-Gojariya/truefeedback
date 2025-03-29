@@ -19,6 +19,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" >
       <AuthProvider>
+        <script defer data-domain="truefeedback.site" src="https://plausible.io/js/script.js"></script>
         <body className={`${inter.className} bg-gray-900`}>
           {children}
           <Toaster />
