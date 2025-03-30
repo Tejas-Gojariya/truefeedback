@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Loader2 } from 'lucide-react';
 import { ArrowRight, Play } from 'lucide-react';
 import Link from "next/link";
 
@@ -18,32 +17,20 @@ const UserInfo: React.FC = () => {
         const fetchData = async () => {
             try {
                 const res = await fetch("/api/count-information");
-                if (!res.ok) {
+                if (!res.ok) {  
                     throw new Error("Failed to fetch user data");
                 }
                 const result: UserData = await res.json();
                 setData(result);
-                setLoading(false);
             } catch (err: unknown) {
-                if (err instanceof Error) {
-                    setError(err.message);
-                } else {
-                    setError("An unknown error occurred");
-                }
+                setError("Failed to load data");
+            } finally {
                 setLoading(false);
             }
         };
 
         fetchData();
     }, []);
-
-    if (loading) {
-        return <p className="text-white flex justify-center"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Loading...</p>;
-    }
-
-    if (error) {
-        return <p className="text-red-500 flex justify-center">Error: {error}</p>;
-    }
 
     return (
         <>
@@ -54,11 +41,9 @@ const UserInfo: React.FC = () => {
                     <div className="text-center">
                         <h1 className="text-5xl md:text-7xl font-bold mb-6">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                                {/* Transform Your Team's */}
                                 Dive into the World of
                             </span>
                             <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">
-                                {/* Communication Culture */}
                                 Anonymous Feedback
                             </span>
                         </h1>
@@ -80,32 +65,52 @@ const UserInfo: React.FC = () => {
                                 </button>
                             </Link>
                         </div>
-                        {/* <UserInfo /> */}
+
+                        {/* Stats Section */}
                         <div className="mt-20 grid gap-6 grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-8">
-                            <div>
-                                <h4 className="text-lg sm:text-xl font-semibold text-white">Total Feedback</h4>
-                                <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
-                                    {data?.totalMessages || 0}+
-                                </p>
-                                <p className="mt-1 text-gray-400">Anonymous feedback collected</p>
-                            </div>
+                            {loading ? (
+                                // Skeleton UI while loading
+                                Array(3).fill(0).map((_, index) => (
+                                    <div key={index} className="animate-pulse">
+                                        <div className="h-6 w-32 bg-gray-700 rounded mb-3"></div>
+                                        <div className="h-10 w-24 bg-gray-800 rounded"></div>
+                                        <div className="h-4 w-36 bg-gray-700 rounded mt-2"></div>
+                                    </div>
+                                ))
+                            ) : (
+                                <>
+                                    {/* Total Feedback */}
+                                    <div>
+                                        <h4 className="text-lg sm:text-xl font-semibold text-white">Total Feedback</h4>
+                                        <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
+                                            {data?.totalMessages || 0}+
+                                        </p>
+                                        <p className="mt-1 text-gray-400">Anonymous feedback collected</p>
+                                    </div>
 
-                            <div>
-                                <h4 className="text-lg sm:text-xl font-semibold text-white">Active Users</h4>
-                                <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
-                                    {data?.userCount || 0}+
-                                </p>
-                                <p className="mt-1 text-gray-400">Users actively engaging</p>
-                            </div>
+                                    {/* Active Users */}
+                                    <div>
+                                        <h4 className="text-lg sm:text-xl font-semibold text-white">Active Users</h4>
+                                        <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
+                                            {data?.userCount || 0}+
+                                        </p>
+                                        <p className="mt-1 text-gray-400">Users actively engaging</p>
+                                    </div>
 
-                            <div>
-                                <h4 className="text-lg sm:text-xl font-semibold text-white">Satisfaction Rate</h4>
-                                <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
-                                    {data?.satisfactionPercentage || 0}%
-                                </p>
-                                <p className="mt-1 text-gray-400">Positive feedback this year</p>
-                            </div>
+                                    {/* Satisfaction Rate */}
+                                    <div>
+                                        <h4 className="text-lg sm:text-xl font-semibold text-white">Satisfaction Rate</h4>
+                                        <p className="mt-2 sm:mt-3 text-4xl sm:text-6xl font-bold text-blue-500">
+                                            {data?.satisfactionPercentage || 0}%
+                                        </p>
+                                        <p className="mt-1 text-gray-400">Positive feedback this year</p>
+                                    </div>
+                                </>
+                            )}
                         </div>
+
+                        {/* Error Message */}
+                        {error && <p className="mt-6 text-red-500 text-lg">{error}</p>}
                     </div>
                 </div>
             </div>
