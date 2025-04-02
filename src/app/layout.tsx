@@ -23,6 +23,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           {children}
           <Toaster />
           <script defer data-domain="truefeedback.site" src="https://plausible.io/js/script.js"></script>
+          <script src="https://api.testit.so/script.js?project=67ece367881c04033243caae"></script>
         </body>
       </AuthProvider>
     </html>
