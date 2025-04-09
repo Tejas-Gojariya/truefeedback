@@ -11,23 +11,20 @@ export default function TrueFeedbackOverview() {
     const [scrollY, setScrollY] = useState(0)
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY)
-        }
-
+        const handleScroll = () => setScrollY(window.scrollY)
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
     return (
         <div className="min-h-screen text-gray-100">
-            <main className="container py-12">
+            <main className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {/* Hero Section */}
-                <section className="mx-auto  max-w-5xl">
-                    <h1 className="animate-fade-in text-center text-4xl font-bold tracking-tight sm:text-5xl bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                <section className="text-center">
+                    <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                         How It Works
                     </h1>
-                    <div className="mt-12 grid gap-8 md:grid-cols-3">
+                    <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {[
                             {
                                 title: "Create Account",
@@ -57,8 +54,9 @@ export default function TrueFeedbackOverview() {
                 </section>
 
                 {/* Main Feature Showcase */}
-                <section className="mx-auto mt-20 max-w-6xl rounded-xl bg-gray-800 p-8 shadow-lg border border-gray-700 animate-on-scroll">
-                    <div className="grid gap-8 md:grid-cols-2">
+                <section className="mt-20 bg-gray-800 border border-gray-700 rounded-xl p-6 sm:p-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        {/* Text Section */}
                         <div>
                             <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                                 Get Feedback From Anyone
@@ -73,13 +71,11 @@ export default function TrueFeedbackOverview() {
                                     description="Share your unique URL with anyone to collect feedback"
                                     icon={<Share2 className="h-5 w-5 text-blue-500" />}
                                 />
-
                                 <FeatureItem
                                     title="Anonymous Responses"
                                     description="Encourage honest feedback without social barriers"
                                     icon={<Star className="h-5 w-5 text-yellow-500" />}
                                 />
-
                                 <FeatureItem
                                     title="Easy Sharing Options"
                                     description="Copy link, generate QR code, or share directly"
@@ -97,11 +93,13 @@ export default function TrueFeedbackOverview() {
                             </div>
                         </div>
 
-                        <div className="rounded-lg border border-gray-700 bg-gray-850 p-6 transition-all duration-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                            <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-3 shadow-sm border border-gray-700">
+                        {/* Form Section */}
+                        <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 space-y-6">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-md bg-gray-900 p-3 shadow-sm border border-gray-700">
+                                {/* Left side: Label */}
                                 <div className="flex items-center gap-2">
                                     <Link2 className="h-5 w-5 text-yellow-500" />
-                                    <span className="font-medium text-gray-200"> Unique URL</span>
+                                    <span className="font-medium text-gray-200">Unique URL</span>
                                 </div>
                                 <div className="flex gap-2">
                                     <Button
@@ -120,39 +118,31 @@ export default function TrueFeedbackOverview() {
                                     </Button>
                                 </div>
                             </div>
-
-                            <div className="rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm">
-                                <h3 className="mb-4 text-xl font-semibold text-white">Leave Feedback for John</h3>
-
+                            <div>
+                                <h3 className="text-xl font-semibold text-white mb-4">Leave Feedback for John</h3>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="mb-1 block text-sm font-medium text-gray-300">Your Message</label>
-                                        <textarea
-                                            className="min-h-[100px] w-full rounded-md border border-gray-700 bg-gray-800 p-2 text-sm text-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                                            placeholder="Share your thoughts anonymously..."
-                                        />
+                                        <label className="block mb-1 text-sm text-gray-300">Your Message</label>
+                                        <textarea className="w-full min-h-[100px] p-2 bg-gray-800 text-gray-200 rounded-md border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Share your thoughts anonymously..." />
                                     </div>
-
                                     <div>
-                                        <label className="mb-1 block text-sm font-medium text-gray-300">Rating</label>
+                                        <label className="block mb-1 text-sm text-gray-300">Rating</label>
                                         <div className="flex gap-1">
                                             {Array.from({ length: 5 }).map((_, i) => (
-                                                <button key={i} className="rounded-md p-1 hover:text-yellow-500 transition-colors">
+                                                <button key={i} className="p-1 hover:text-yellow-500 transition-colors">
                                                     <Star className={`h-6 w-6 ${i < 4 ? "fill-yellow-400 text-yellow-400" : "text-gray-600"}`} />
                                                 </button>
                                             ))}
                                         </div>
                                     </div>
-
                                     <div>
-                                        <label className="mb-1 block text-sm font-medium text-gray-300">Category</label>
-                                        <select className="w-full rounded-md border border-gray-700 bg-gray-800 p-2 text-sm text-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+                                        <label className="block mb-1 text-sm text-gray-300">Category</label>
+                                        <select className="w-full p-2 bg-gray-800 text-gray-200 rounded-md border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                                             <option>General Feedback</option>
                                             <option>Success</option>
                                             <option>Questions</option>
                                         </select>
                                     </div>
-
                                     <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-transform hover:scale-[1.02]">
                                         Submit Anonymous Feedback
                                     </Button>
@@ -162,42 +152,32 @@ export default function TrueFeedbackOverview() {
                     </div>
                 </section>
 
-                {/* Dashboard Preview */}
-                <section className="mx-auto mt-20 max-w-5xl animate-on-scroll">
-                    <h2 className="text-center text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                {/* Dashboard Section */}
+                <section className="mt-20">
+                    <h2 className="text-3xl text-center font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                         Manage Your Feedback
                     </h2>
                     <p className="mt-4 text-center text-lg text-gray-400">
                         View, analyze, and export all the feedback you receive in one place
                     </p>
 
-                    <div className="mt-8 overflow-hidden rounded-xl border border-gray-700 bg-gray-800 shadow-lg">
-                        <div className="border-b border-gray-700 bg-gray-850 p-4">
-                            <div className="flex items-center justify-between">
-                                <h3 className="font-semibold text-white">Your Feedback Dashboard</h3>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700 hover:text-white"
-                                >
-                                    Export Data
-                                </Button>
-                            </div>
+                    <div className="mt-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg overflow-hidden">
+                        <div className="p-4 bg-gray-850 border-b border-gray-700 flex items-center justify-between">
+                            <h3 className="text-white font-semibold">Your Feedback Dashboard</h3>
+                            <Button variant="outline" size="sm" className="bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Export Data
+                            </Button>
                         </div>
 
-                        <div className="grid gap-6 p-6 md:grid-cols-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
                             <StatCard value="12" label="Total Responses" color="blue" />
                             <StatCard value="4.2" label="Average Rating" color="yellow" />
                             <StatCard value="3" label="Categories" color="green" />
                         </div>
 
                         <div className="border-t border-gray-700 p-6">
-                            <h4 className="mb-4 font-medium text-white">Recent Feedback</h4>
-                            <Image src="/review.png"
-                                width={1000}
-                                height={1200}
-                                alt="reviewImage"
-                            />
+                            <h4 className="text-white font-medium mb-4">Recent Feedback</h4>
+                            <Image src="/review.png" width={1000} height={1200} alt="review" className="w-full h-auto rounded-lg" />
                         </div>
                     </div>
                 </section>
@@ -206,22 +186,14 @@ export default function TrueFeedbackOverview() {
     )
 }
 
-function FeatureItem({
-    title,
-    description,
-    icon,
-}: {
-    title: string
-    description: string
-    icon: React.ReactNode
-}) {
+function FeatureItem({ title, description, icon }: { title: string, description: string, icon: React.ReactNode }) {
     return (
         <div className="flex gap-3 group">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-700 group-hover:bg-gray-600 transition-colors">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 group-hover:bg-gray-600">
                 {icon}
             </div>
             <div>
-                <h3 className="font-medium text-white group-hover:text-blue-400 transition-colors">{title}</h3>
+                <h3 className="font-medium text-white group-hover:text-blue-400">{title}</h3>
                 <p className="text-sm text-gray-400">{description}</p>
             </div>
         </div>
@@ -243,15 +215,8 @@ function AnimatedCard({ children, index }: { children: React.ReactNode; index: n
             { threshold: 0.1 },
         )
 
-        if (cardRef.current) {
-            observer.observe(cardRef.current)
-        }
-
-        return () => {
-            if (cardRef.current) {
-                observer.unobserve(cardRef.current)
-            }
-        }
+        if (cardRef.current) observer.observe(cardRef.current)
+        return () => cardRef.current && observer.unobserve(cardRef.current)
     }, [])
 
     return (
@@ -271,7 +236,6 @@ function StatCard({ value, label, color }: { value: string; label: string; color
         yellow: "bg-yellow-900/30 border-yellow-800 text-yellow-400",
         green: "bg-green-900/30 border-green-800 text-green-400",
     }
-
     return (
         <div className={`rounded-lg border p-4 text-center transition-transform hover:scale-105 ${colorClasses[color]}`}>
             <div className="text-3xl font-bold">{value}</div>
