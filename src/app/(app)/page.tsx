@@ -1,6 +1,5 @@
 'use client';
 
-import Footer from '@/components/Footer';
 import UserInfo from '@/components/UserInfo';
 import { Features } from '@/components/Features';
 import { CTA } from '@/components/CTA';
@@ -14,7 +13,6 @@ export default function Home() {
         <Features />
         <Testimonials />
         <CTA />
-        <Footer />
       </div>
     </>
   );
